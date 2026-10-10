@@ -7,6 +7,23 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  // Wajib 'standalone' — Dockerfile copies .next/standalone -> server.js.
+  output: 'standalone',
+  // Cache: file media tak ber-hash nama tapi Payload sufiks saat tabrakan,
+  // aman cache harian + SWR mingguan.
+  async headers() {
+    return [
+      {
+        source: '/api/media/file/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
+          },
+        ],
+      },
+    ]
+  },
   images: {
     localPatterns: [
       {

@@ -7,9 +7,19 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Categories } from './collections/Categories'
+import { Products } from './collections/Products'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+// Origin frontend yang boleh akses API (CORS) + terima cookie Payload (CSRF).
+// Format: satu/beberapa URL dipisah koma di CORS_ORIGIN. Default = Vite dev.
+const corsOrigins = (process.env.CORS_ORIGIN ?? 'http://localhost:5173')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
 
 export default buildConfig({
   admin: {
@@ -18,7 +28,14 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Categories, Products, Posts],
+  localization: {
+    locales: ['en', 'id'],
+    defaultLocale: 'en',
+    fallback: true,
+  },
+  cors: corsOrigins,
+  csrf: corsOrigins,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

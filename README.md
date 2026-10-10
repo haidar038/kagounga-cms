@@ -1,67 +1,41 @@
-# Payload Blank Template
+# Kagounga CMS — Payload 3 + Postgres
 
-This template comes configured with the bare minimum to get started on anything you need.
+Admin + API untuk konten `new-kagounga` (target M2 Produk, M3 Berita). Status M3: koleksi `users` + `media` + `categories` + `products` + `posts` (localization en/id), konverter Lexical↔markdown, seed produk + berita siap (`bun run seed:products`, `bun run seed:posts`, butuh Postgres).
 
-## Quick start
+## Syarat
+- Node >= 20.18.1, bun 1.x (repo pakai `bun.lock`; `pnpm` opsional).
+- Postgres 16 lokal atau via Docker.
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+## Setup cepat
+1. `cp .env.example .env`, isi `DATABASE_URL` + `PAYLOAD_SECRET`.
+   - Lokal tanpa Docker: `postgresql://postgres:postgres@localhost:5432/kagounga_cms`
+   - Via compose (hostname service): `postgresql://postgres:postgres@postgres:5432/kagounga_cms`
+2. Install + jalan:
+   - `bun install && bun run dev` (atau `npm install && npm run dev`)
+   - Buka `http://localhost:3000/admin`, buat admin pertama via UI.
+3. Via Docker (butuh Docker terinstall):
+   - `docker compose up --build` (service `payload` + `postgres`)
 
-## Quick Start - local setup
+## Env
+| Key | Contoh | Guna |
+|---|---|---|
+| `DATABASE_URL` | `postgresql://postgres:postgres@localhost:5432/kagounga_cms` | koneksi Postgres |
+| `PAYLOAD_SECRET` | random 32+ char | sign cookie/JWT |
+| `NEXT_PUBLIC_CMS_URL` | `http://localhost:3000` | base URL dipakai frontend |
+| `CORS_ORIGIN` | `http://localhost:5173` | origin frontend (koma bila >1) |
 
-To spin up this template locally, follow these steps:
+## API smoke (M1)
+- `GET http://localhost:3000/api/media?limit=1` → publik, expect `{docs,totalDocs,...}`.
+- `GET http://localhost:3000/api/users` → butuh login (expect 401).
+- Admin: `http://localhost:3000/admin`.
 
-### Clone
+## Skrip
+- `dev` / `build` / `start` — Next + Payload.
+- `generate:types` — regen `src/payload-types.ts` tiap ubah koleksi.
+- `generate:importmap` — regen admin import map.
+- `test:int` (vitest) / `test:e2e` (playwright, butuh `pnpm dev` + browser).
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
-
-### Development
-
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
-
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
-
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
-
-#### Docker (Optional)
-
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
-
-To do so, follow these steps:
-
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
-
-## How it works
-
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
-
-### Collections
-
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
-
-- #### Users (Authentication)
-
-  Users are auth-enabled collections that have access to the admin panel.
-
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
-
-- #### Media
-
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+## Catatan M1
+- `next.config.ts` pakai `output:'standalone'` (sinkron `Dockerfile`).
+- `payload.config.ts` baca `CORS_ORIGIN` → `cors` + `csrf`.
+- Koleksi Produk/Posts menyusul M2–M3 (`docs/INTEGRATION-MAP.md` di root).
