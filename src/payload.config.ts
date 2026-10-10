@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -20,6 +21,46 @@ const corsOrigins = (process.env.CORS_ORIGIN ?? 'http://localhost:5173')
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean)
+
+// Media persisten (M7): disk lokal hilang tiap deploy (Vercel ephemeral).
+// Plugin S3 aktif hanya bila S3_BUCKET diset — dev lokal tanpa kredensial
+// tetap pakai upload disk. R2/S3-compatible via S3_ENDPOINT (+ path-style).
+const s3Bucket = process.env.S3_BUCKET || ''
+const s3Plugins =
+  s3Bucket === ''
+    ? []
+    : [
+        s3Storage({
+          collections: {
+            media: {
+              prefix: 'media',
+              disableLocalStorage: true,
+              generateFileURL: ({
+                filename,
+                prefix,
+              }: {
+                filename: string
+                prefix?: string
+              }) => {
+                const base = (
+                  process.env.S3_PUBLIC_URL || `https://${s3Bucket}.s3.amazonaws.com`
+                ).replace(/\/+$/, '')
+                return `${base}/${prefix ? `${prefix}/` : ''}${filename}`
+              },
+            },
+          },
+          bucket: s3Bucket,
+          config: {
+            credentials: {
+              accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+              secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+            },
+            region: process.env.S3_REGION || 'auto',
+            ...(process.env.S3_ENDPOINT ? { endpoint: process.env.S3_ENDPOINT } : {}),
+            ...(process.env.S3_FORCE_PATH_STYLE === 'true' ? { forcePathStyle: true } : {}),
+          },
+        }),
+      ]
 
 export default buildConfig({
   admin: {
@@ -47,5 +88,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [...s3Plugins],
 })
