@@ -51,6 +51,7 @@ describe('Roles', () => {
   }, 120000)
 
   afterAll(async () => {
+    if (!payload) return // beforeAll gugur (mis. DB) — jangan samarkan error asli.
     await payload.delete({
       collection: 'products',
       where: { slug: { equals: PRODUCT_SLUG } },

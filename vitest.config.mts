@@ -8,5 +8,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
     include: ['tests/int/**/*.int.spec.ts'],
+    // CI: DB service kosong; dev-push 4 file paralel adu CREATE TYPE/TABLE.
+    // Serial via env (GitHub set CI=true otomatis) — lokal tetap paralel.
+    // CLI `-- --maxWorkers` tak bisa di sini (pnpm teruskan `--` mentah).
+    maxWorkers: process.env.CI ? 1 : undefined,
   },
 })

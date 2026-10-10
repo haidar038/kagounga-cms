@@ -52,6 +52,7 @@ describe('Products', () => {
   // ^ init Payload tarik skema ~25s saat 3 worker paralel.
 
   afterAll(async () => {
+    if (!payload) return // beforeAll gugur (mis. DB) — jangan samarkan error asli.
     await payload.delete({
       collection: 'products',
       where: { slug: { in: SLUGS } },

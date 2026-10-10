@@ -43,7 +43,5 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec tsc --noEmit -p tsconfig.json
-      # Serial (1 worker): DB CI kosong, dev-push paralel adu CREATE TABLE.
-      # Nominal ~2-3 mnt, jauh di bawah timeout.
-      - run: pnpm run test:int -- --maxWorkers=1
+      - run: pnpm run test:int
       - run: pnpm run build
