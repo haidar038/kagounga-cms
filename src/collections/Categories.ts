@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { fillSlugFromTitle, slugField } from './slug'
+import { isAuthenticated } from './access'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
@@ -10,6 +11,9 @@ export const Categories: CollectionConfig = {
   },
   access: {
     read: () => true,
+    create: isAuthenticated,
+    update: isAuthenticated,
+    delete: isAuthenticated,
   },
   fields: [
     {

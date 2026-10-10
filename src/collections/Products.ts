@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { fillSlugFromTitle, slugField } from './slug'
 import { imagePair, publishedOrAuth } from './shared'
+import { isAuthenticated } from './access'
 
 /**
  * Katalog produk. Cermin 1:1 field `ProductDetail` frontend
@@ -17,6 +18,10 @@ export const Products: CollectionConfig = {
   },
   access: {
     read: publishedOrAuth,
+    // Editor boleh publish (keputusan M9). Tulis wajib login; anon 403.
+    create: isAuthenticated,
+    update: isAuthenticated,
+    delete: isAuthenticated,
   },
   fields: [
     {
