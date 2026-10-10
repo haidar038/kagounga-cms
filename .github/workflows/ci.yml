@@ -43,5 +43,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec tsc --noEmit -p tsconfig.json
+      - run: pnpm run lint
       - run: pnpm run test:int
       - run: pnpm run build
