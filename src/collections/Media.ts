@@ -1,9 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
+import { copy } from '../admin/copy'
 import { isAuthenticated } from './access'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  admin: {
+    group: 'Content',
+    description: 'Image library. / Pustaka gambar.',
+  },
   access: {
     read: () => true,
     create: isAuthenticated,
@@ -15,6 +20,7 @@ export const Media: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: true,
+      admin: { description: copy.altMedia },
     },
   ],
   upload: {

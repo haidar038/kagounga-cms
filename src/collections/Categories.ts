@@ -7,7 +7,10 @@ export const Categories: CollectionConfig = {
   slug: 'categories',
   admin: {
     useAsTitle: 'title',
+    group: 'Catalog',
+    description: 'Product and post categories. / Kategori produk dan berita.',
     defaultColumns: ['title', 'slug', 'type'],
+    listSearchableFields: ['title', 'slug'],
   },
   access: {
     read: () => true,

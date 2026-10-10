@@ -130,7 +130,7 @@ export interface UserAuthOperations {
 export interface User {
   id: number;
   /**
-   * Hanya admin bisa ubah. User baru default editor.
+   * Only admin can change. New users default to editor. / Hanya admin bisa ubah. User baru default editor.
    */
   role: 'admin' | 'editor';
   updatedAt: string;
@@ -154,11 +154,16 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Image library. / Pustaka gambar.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
+  /**
+   * Alt text for image. / Teks alt gambar.
+   */
   alt: string;
   prefix?: string | null;
   _objectKey?: string | null;
@@ -201,6 +206,8 @@ export interface Media {
   };
 }
 /**
+ * Product and post categories. / Kategori produk dan berita.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
@@ -208,7 +215,7 @@ export interface Category {
   id: number;
   title: string;
   /**
-   * URL key (huruf kecil + strip). Otomatis dari title bila kosong.
+   * URL key (lowercase + dashes). Auto from title when empty. / URL key (huruf kecil + strip). Otomatis dari title bila kosong.
    */
   slug: string;
   type: 'product' | 'post';
@@ -216,6 +223,8 @@ export interface Category {
   createdAt: string;
 }
 /**
+ * Catalog products. / Produk katalog.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products".
  */
@@ -223,24 +232,28 @@ export interface Product {
   id: number;
   title: string;
   /**
-   * URL key (huruf kecil + strip). Otomatis dari title bila kosong.
+   * URL key (lowercase + dashes). Auto from title when empty. / URL key (huruf kecil + strip). Otomatis dari title bila kosong.
    */
   slug: string;
   /**
-   * Blurb kartu katalog.
-   */
-  excerpt: string;
-  /**
-   * Catatan dialog produk.
-   */
-  note: string;
-  /**
-   * Harga angka. Render mata uang di frontend.
+   * Numeric price. Currency rendered in frontend. / Harga angka. Mata uang dirender di frontend.
    */
   priceNumber: number;
   currency: 'USD' | 'IDR';
+  /**
+   * Price unit, e.g. "/ box". / Satuan harga, mis. "/ box".
+   */
+  per?: string | null;
   badges?: string[] | null;
   eyebrow?: string | null;
+  /**
+   * Card blurb. / Blurb kartu katalog.
+   */
+  excerpt: string;
+  /**
+   * Product dialog note. / Catatan dialog produk.
+   */
+  note: string;
   specs?:
     | {
         label: string;
@@ -251,19 +264,15 @@ export interface Product {
   insideTitle?: string | null;
   inside?: string[] | null;
   /**
-   * Satuan harga, mis. "/ box".
-   */
-  per?: string | null;
-  /**
-   * Alt teks gambar. Kosong = pakai title.
-   */
-  alt?: string | null;
-  /**
-   * Upload baru. Kosong bila pakai imageUrl.
+   * New upload. Empty when using imageUrl. / Upload baru. Kosong bila pakai imageUrl.
    */
   image?: (number | null) | Media;
   /**
-   * URL remote (Cloudinary lama). Wajib bila image kosong.
+   * Image alt text. Empty = use title. / Teks alt gambar. Kosong = pakai title.
+   */
+  alt?: string | null;
+  /**
+   * Remote URL (legacy Cloudinary). Required when image empty. / URL remote (Cloudinary lama). Wajib bila image kosong.
    */
   imageUrl?: string | null;
   category?: (number | null) | Category;
@@ -271,13 +280,15 @@ export interface Product {
   publishedAt?: string | null;
   featured?: boolean | null;
   /**
-   * Urut tampil katalog menaik.
+   * Catalog display order ascending. / Urut tampil katalog menaik.
    */
   sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * News articles. / Artikel berita.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
@@ -285,23 +296,15 @@ export interface Post {
   id: number;
   title: string;
   /**
-   * URL key (huruf kecil + strip). Otomatis dari title bila kosong.
+   * URL key (lowercase + dashes). Auto from title when empty. / URL key (huruf kecil + strip). Otomatis dari title bila kosong.
    */
   slug: string;
   /**
-   * Meta description SEO per locale.
-   */
-  metaDescription: string;
-  /**
-   * Ringkasan kartu berita.
-   */
-  excerpt: string;
-  /**
-   * Paragraf pembuka artikel.
+   * Article opening paragraph. / Paragraf pembuka artikel.
    */
   lede: string;
   /**
-   * Isi artikel. Ekspor markdown via `src/utils/lexical-markdown.ts`.
+   * Article body. Markdown export via lexical-markdown util. / Isi artikel. Ekspor markdown via util lexical-markdown.
    */
   content: {
     root: {
@@ -318,15 +321,23 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  coverAlt: string;
   /**
-   * Upload cover baru. Kosong bila pakai coverUrl.
+   * News card summary. / Ringkasan kartu berita.
+   */
+  excerpt: string;
+  /**
+   * New cover upload. Empty when using coverUrl. / Upload cover baru. Kosong bila pakai coverUrl.
    */
   featuredImage?: (number | null) | Media;
+  coverAlt: string;
   /**
-   * URL cover remote (Cloudinary lama). Wajib bila featuredImage kosong.
+   * Remote cover URL (legacy Cloudinary). Required when featuredImage empty. / URL cover remote (Cloudinary lama). Wajib bila featuredImage kosong.
    */
   coverUrl?: string | null;
+  /**
+   * SEO meta description per locale. / Meta description SEO per locale.
+   */
+  metaDescription: string;
   categories?: (number | Category)[] | null;
   author?: (number | null) | User;
   status: 'draft' | 'published';
@@ -516,12 +527,13 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  excerpt?: T;
-  note?: T;
   priceNumber?: T;
   currency?: T;
+  per?: T;
   badges?: T;
   eyebrow?: T;
+  excerpt?: T;
+  note?: T;
   specs?:
     | T
     | {
@@ -531,9 +543,8 @@ export interface ProductsSelect<T extends boolean = true> {
       };
   insideTitle?: T;
   inside?: T;
-  per?: T;
-  alt?: T;
   image?: T;
+  alt?: T;
   imageUrl?: T;
   category?: T;
   status?: T;
@@ -550,13 +561,13 @@ export interface ProductsSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  metaDescription?: T;
-  excerpt?: T;
   lede?: T;
   content?: T;
-  coverAlt?: T;
+  excerpt?: T;
   featuredImage?: T;
+  coverAlt?: T;
   coverUrl?: T;
+  metaDescription?: T;
   categories?: T;
   author?: T;
   status?: T;

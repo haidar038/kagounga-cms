@@ -1,0 +1,17 @@
+// Kagounga token parity (M12) — mirror frontend `new-kagounga/src/index.css` @theme.
+// cream #F3F1E9, ink #1F2C22, lime #DBF066, font Open Sauce One.
+// Sengaja minimal (font + radius + selection): warna elevation Payload
+// (light/dark) tak disentuh agar kontras bawaan tetap aman saat upgrade.
+@import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
+:root {
+  --font-body: 'Open Sauce One', ui-sans-serif, system-ui, sans-serif;
+  --style-radius-s: 12px;
+  --style-radius-m: 16px;
+  --style-radius-l: 24px;
+}
+
+::selection {
+  background: #1f2c22;
+  color: #dbf066;
+}

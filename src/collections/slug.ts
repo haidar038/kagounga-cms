@@ -1,5 +1,7 @@
 import type { CollectionBeforeValidateHook, Field } from 'payload'
 
+import { copy } from '../admin/copy'
+
 export function slugify(value: string): string {
   return value
     .toLowerCase()
@@ -17,13 +19,11 @@ export function slugField(): Field {
     required: true,
     unique: true,
     admin: {
-      description: 'URL key (huruf kecil + strip). Otomatis dari title bila kosong.',
+      description: copy.slug,
     },
     validate: (val: unknown) => {
-      if (typeof val !== 'string' || val.length === 0) return 'Slug wajib diisi.'
-      return (
-        /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(val) || 'Slug: huruf kecil, angka, dan strip saja.'
-      )
+      if (typeof val !== 'string' || val.length === 0) return copy.slugRequired
+      return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(val) || copy.slugPattern
     },
   }
 }

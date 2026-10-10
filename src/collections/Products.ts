@@ -1,21 +1,26 @@
 import type { CollectionConfig } from 'payload'
 
+import { copy } from '../admin/copy'
 import { fillSlugFromTitle, slugField } from './slug'
-import { imagePair, publishedOrAuth } from './shared'
+import { imageRelationField, imageUrlField, publishedOrAuth } from './shared'
 import { isAuthenticated } from './access'
 
 /**
  * Katalog produk. Cermin 1:1 field `ProductDetail` frontend
  * (`new-kagounga/src/types/content.ts`) agar adapter M4 tinggal map.
  * Gambar: relasi `image` (upload baru) atau `imageUrl` (Cloudinary lama).
- * Lokalisasi ID/EN menyusul M3 — seed kini EN base.
+ * Tabs/collapsible di bawah presentational saja (unnamed) — skema/API tetap.
  */
 export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
+    group: 'Catalog',
+    description: 'Catalog products. / Produk katalog.',
+    defaultColumns: ['title', 'coverPreview', 'slug', 'status', 'sortOrder', 'updatedAt'],
+    listSearchableFields: ['title', 'slug'],
   },
+  defaultSort: 'sortOrder',
   access: {
     read: publishedOrAuth,
     // Editor boleh publish (keputusan M9). Tulis wajib login; anon 403.
@@ -25,91 +30,134 @@ export const Products: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    slugField(),
-    {
-      name: 'excerpt',
-      type: 'textarea',
-      required: true,
-      localized: true,
-      admin: { description: 'Blurb kartu katalog.' },
-    },
-    {
-      name: 'note',
-      type: 'textarea',
-      required: true,
-      localized: true,
-      admin: { description: 'Catatan dialog produk.' },
-    },
-    {
-      name: 'priceNumber',
-      type: 'number',
-      required: true,
-      min: 0,
-      admin: { description: 'Harga angka. Render mata uang di frontend.' },
-    },
-    {
-      name: 'currency',
-      type: 'select',
-      required: true,
-      defaultValue: 'USD',
-      options: ['USD', 'IDR'],
-    },
-    {
-      name: 'badges',
-      type: 'text',
-      hasMany: true,
-      localized: true,
-    },
-    {
-      name: 'eyebrow',
-      type: 'text',
-      localized: true,
-    },
-    {
-      name: 'specs',
-      type: 'array',
-      localized: true,
-      fields: [
-        { name: 'label', type: 'text', required: true },
-        { name: 'value', type: 'text', required: true },
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'General / Umum',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+            },
+            slugField(),
+            {
+              name: 'priceNumber',
+              type: 'number',
+              required: true,
+              min: 0,
+              admin: { description: copy.priceNumber },
+            },
+            {
+              name: 'currency',
+              type: 'select',
+              required: true,
+              defaultValue: 'USD',
+              options: ['USD', 'IDR'],
+            },
+            {
+              name: 'per',
+              type: 'text',
+              localized: true,
+              admin: { description: copy.per },
+            },
+            {
+              name: 'badges',
+              type: 'text',
+              hasMany: true,
+              localized: true,
+            },
+            {
+              name: 'eyebrow',
+              type: 'text',
+              localized: true,
+            },
+          ],
+        },
+        {
+          label: 'Content / Konten',
+          fields: [
+            {
+              name: 'excerpt',
+              type: 'textarea',
+              required: true,
+              localized: true,
+              admin: { description: copy.excerptProduct },
+            },
+            {
+              name: 'note',
+              type: 'textarea',
+              required: true,
+              localized: true,
+              admin: { description: copy.noteProduct },
+            },
+            {
+              name: 'specs',
+              type: 'array',
+              localized: true,
+              fields: [
+                { name: 'label', type: 'text', required: true },
+                { name: 'value', type: 'text', required: true },
+              ],
+            },
+            {
+              name: 'insideTitle',
+              type: 'text',
+              localized: true,
+            },
+            {
+              name: 'inside',
+              type: 'text',
+              hasMany: true,
+              localized: true,
+            },
+          ],
+        },
+        {
+          label: 'Media',
+          fields: [
+            imageRelationField({ name: 'image', label: copy.imageRelation }),
+            {
+              name: 'coverPreview',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: '@/admin/ImagePreview#ProductImagePreview',
+                  Cell: '@/admin/ImageThumbCell#ProductThumbCell',
+                },
+                disableListColumn: false,
+              },
+            },
+            {
+              name: 'alt',
+              type: 'text',
+              admin: { description: copy.altProduct },
+            },
+            {
+              type: 'collapsible',
+              label: copy.legacyUrl,
+              admin: { initCollapsed: true },
+              fields: [
+                imageUrlField({
+                  name: 'imageUrl',
+                  relationName: 'image',
+                  label: copy.imageUrl,
+                }),
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Settings / Pengaturan',
+          fields: [
+            {
+              name: 'category',
+              type: 'relationship',
+              relationTo: 'categories',
+            },
+          ],
+        },
       ],
-    },
-    {
-      name: 'insideTitle',
-      type: 'text',
-      localized: true,
-    },
-    {
-      name: 'inside',
-      type: 'text',
-      hasMany: true,
-      localized: true,
-    },
-    {
-      name: 'per',
-      type: 'text',
-      localized: true,
-      admin: { description: 'Satuan harga, mis. "/ box".' },
-    },
-    {
-      name: 'alt',
-      type: 'text',
-      admin: { description: 'Alt teks gambar. Kosong = pakai title.' },
-    },
-    ...imagePair({
-      relationName: 'image',
-      urlName: 'imageUrl',
-      relationLabel: 'Upload baru. Kosong bila pakai imageUrl.',
-      urlLabel: 'URL remote (Cloudinary lama). Wajib bila image kosong.',
-    }),
-    {
-      name: 'category',
-      type: 'relationship',
-      relationTo: 'categories',
     },
     {
       name: 'status',
@@ -134,7 +182,8 @@ export const Products: CollectionConfig = {
       name: 'sortOrder',
       type: 'number',
       defaultValue: 0,
-      admin: { position: 'sidebar', description: 'Urut tampil katalog menaik.' },
+      min: 0,
+      admin: { position: 'sidebar', description: copy.sortOrder },
     },
   ],
   hooks: {

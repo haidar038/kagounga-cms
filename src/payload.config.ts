@@ -79,6 +79,10 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      titleSuffix: '— Kagounga CMS',
+      description: 'Kagounga CMS — manage catalog and news.',
+    },
   },
   collections: [Users, Media, Categories, Products, Posts],
   localization: {

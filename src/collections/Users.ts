@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
+import { copy } from '../admin/copy'
 import { isAdmin, isAdminField, isAdminOrSelf } from './access'
 
 export const Users: CollectionConfig = {
@@ -28,7 +29,7 @@ export const Users: CollectionConfig = {
         // Editor tak bisa naikkan diri sendiri. Koleksi create sudah admin-only.
         update: isAdminField,
       },
-      admin: { description: 'Hanya admin bisa ubah. User baru default editor.' },
+      admin: { description: copy.role },
     },
   ],
 }
