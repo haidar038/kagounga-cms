@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
@@ -62,6 +63,16 @@ const s3Plugins =
         }),
       ]
 
+// Email transaksional (reset password dsb). Tanpa RESEND_API_KEY = tulis ke
+// console (dev). Wajib diset di prod.
+const emailAdapter = process.env.RESEND_API_KEY
+  ? resendAdapter({
+      defaultFromAddress: process.env.RESEND_FROM_ADDRESS || 'noreply@kagounga.com',
+      defaultFromName: process.env.RESEND_FROM_NAME || 'Kagounga',
+      apiKey: process.env.RESEND_API_KEY,
+    })
+  : undefined
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -78,6 +89,7 @@ export default buildConfig({
   cors: corsOrigins,
   csrf: corsOrigins,
   editor: lexicalEditor(),
+  email: emailAdapter,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
