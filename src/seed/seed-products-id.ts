@@ -1,0 +1,80 @@
+import { readFileSync } from 'node:fs'
+import 'dotenv/config'
+import { getPayload } from 'payload'
+
+import config from '../payload.config.js'
+import { PRODUCTS_SEED } from './products.seed.js'
+
+interface ProductOverlay {
+  blurb?: string
+  eyebrow?: string
+  badges?: string[]
+  specs?: Array<{ label: string; value: string }>
+  insideTitle?: string | null
+  inside?: string[] | null
+  note?: string
+  per?: string
+}
+
+/**
+ * Isi locale ID untuk 8 produk dari overlay `new-kagounga/src/locales/id/catalog.json`.
+ * Idempoten (timpa ulang aman). Update locale wajib semua required field (excerpt, note).
+ * Jalan: `bun run seed:products:id [path-ke-id-catalog.json]`
+ * (butuh DATABASE_URL + PAYLOAD_SECRET).
+ */
+async function main(): Promise<void> {
+  const fromArg = process.argv[2]
+  const source =
+    fromArg ?? new URL('../../../new-kagounga/src/locales/id/catalog.json', import.meta.url)
+  const overlays = (JSON.parse(readFileSync(source, 'utf8')) as { products?: Record<string, ProductOverlay> })
+    .products ?? {}
+  const payload = await getPayload({ config })
+  let updated = 0
+
+  for (const seed of PRODUCTS_SEED) {
+    const ov = overlays[seed.slug]
+    if (!ov?.blurb || !ov.note) {
+      payload.logger.warn(`skip ${seed.slug}: overlay ID tak lengkap`)
+      continue
+    }
+    const found = await payload.find({
+      collection: 'products',
+      where: { slug: { equals: seed.slug } },
+      limit: 1,
+      overrideAccess: true,
+    })
+    if (found.totalDocs === 0) {
+      payload.logger.warn(`skip ${seed.slug}: produk belum ada (seed:products dulu)`)
+      continue
+    }
+    await payload.update({
+      collection: 'products',
+      id: found.docs[0].id,
+      locale: 'id',
+      data: {
+        excerpt: ov.blurb,
+        note: ov.note,
+        ...(ov.eyebrow !== undefined ? { eyebrow: ov.eyebrow } : {}),
+        ...(ov.badges !== undefined ? { badges: ov.badges } : {}),
+        ...(ov.specs !== undefined ? { specs: ov.specs } : {}),
+        ...(ov.insideTitle !== undefined && ov.insideTitle !== null
+          ? { insideTitle: ov.insideTitle }
+          : {}),
+        ...(ov.inside !== undefined && ov.inside !== null ? { inside: ov.inside } : {}),
+        ...(ov.per !== undefined ? { per: ov.per } : {}),
+      },
+      overrideAccess: true,
+    })
+    updated += 1
+    payload.logger.info(`updated id:${seed.slug}`)
+  }
+
+  payload.logger.info(`selesai: ${updated} locale-ID diperbarui`)
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((err) => {
+    console.error(err)
+    process.exit(1)
+  })

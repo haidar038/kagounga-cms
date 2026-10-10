@@ -29,12 +29,14 @@ export const Products: CollectionConfig = {
       name: 'excerpt',
       type: 'textarea',
       required: true,
+      localized: true,
       admin: { description: 'Blurb kartu katalog.' },
     },
     {
       name: 'note',
       type: 'textarea',
       required: true,
+      localized: true,
       admin: { description: 'Catatan dialog produk.' },
     },
     {
@@ -55,14 +57,17 @@ export const Products: CollectionConfig = {
       name: 'badges',
       type: 'text',
       hasMany: true,
+      localized: true,
     },
     {
       name: 'eyebrow',
       type: 'text',
+      localized: true,
     },
     {
       name: 'specs',
       type: 'array',
+      localized: true,
       fields: [
         { name: 'label', type: 'text', required: true },
         { name: 'value', type: 'text', required: true },
@@ -71,15 +76,18 @@ export const Products: CollectionConfig = {
     {
       name: 'insideTitle',
       type: 'text',
+      localized: true,
     },
     {
       name: 'inside',
       type: 'text',
       hasMany: true,
+      localized: true,
     },
     {
       name: 'per',
       type: 'text',
+      localized: true,
       admin: { description: 'Satuan harga, mis. "/ box".' },
     },
     {
