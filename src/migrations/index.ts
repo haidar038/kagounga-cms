@@ -2,6 +2,7 @@ import * as migration_20261010_120000_products_localization from './20261010_120
 import * as migration_20261010_181046_users_roles from './20261010_181046_users_roles';
 import * as migration_20261012_023059 from './20261012_023059';
 import * as migration_20261012_034025 from './20261012_034025';
+import * as migration_20261012_041000_enable_rls from './20261012_041000_enable_rls';
 
 export const migrations = [
   {
@@ -23,5 +24,10 @@ export const migrations = [
     up: migration_20261012_034025.up,
     down: migration_20261012_034025.down,
     name: '20261012_034025'
+  },
+  {
+    up: migration_20261012_041000_enable_rls.up,
+    down: migration_20261012_041000_enable_rls.down,
+    name: '20261012_041000_enable_rls'
   },
 ];
