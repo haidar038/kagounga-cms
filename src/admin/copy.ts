@@ -27,6 +27,21 @@ export const copy = {
   previewEmpty: 'No image yet — fill the URL or pick an upload. / Belum ada gambar — isi URL atau pilih upload.',
   previewUploadOnly: 'Upload selected — save, then check Media for the file. / Upload terpilih — simpan, lalu cek file di Media.',
   legacyUrl: 'Legacy URL (Cloudinary) / URL lama (Cloudinary)',
+  packaging: 'Box/pouch material, e.g. "350 gsm Ivory Board, Matte Laminated, Tuck-End Box". / Bahan kemasan, mis. "350 gsm Ivory Board, Matte Laminated, Tuck-End Box".',
+  dimensions: 'Pack dimensions, e.g. "8.5 x 14 x 3 cm". / Dimensi kemasan, mis. "8.5 x 14 x 3 cm".',
+  netWeight: 'Net weight, e.g. "50 g". / Berat bersih, mis. "50 g".',
+  grossWeight: 'Gross weight, e.g. "60 g". / Berat kotor, mis. "60 g".',
+  origin: 'Country of origin, e.g. "Ternate, North Maluku, Indonesia". / Negara asal, mis. "Ternate, Maluku Utara, Indonesia".',
+  shelfLife: 'Shelf life, e.g. "Up to 12 months". / Masa simpan, mis. "Hingga 12 bulan".',
+  certification: 'Certifications, e.g. "P-IRT, Halal Indonesia, Nutrition Fact, IPR". / Sertifikasi, mis. "P-IRT, Halal Indonesia, Nutrition Fact, IPR".',
+  moq: 'Minimum order quantity for wholesale. Empty = retail only. / Jumlah pesanan minimum grosir. Kosong = ritel saja.',
+  moqUnit: 'MOQ unit, e.g. "/ unit" or "units". / Satuan MOQ, mis. "/ unit" atau "unit".',
+  wholesalePriceNumber: 'Wholesale price number. Empty = no wholesale tier. / Angka harga grosir. Kosong = tanpa tier grosir.',
+  wholesaleCurrency: 'Wholesale currency. / Mata uang grosir.',
+  wholesalePer: 'Wholesale unit, e.g. "/ unit". / Satuan grosir, mis. "/ unit".',
+  shipping: 'Shipping note, e.g. "Excluded" or "Excluded — buyer arranges freight". / Catatan pengiriman, mis. "Excluded".',
+  physicalDetails: 'Physical details / Detail fisik',
+  wholesale: 'Wholesale (B2B) / Grosir (B2B)',
 } as const
 
 /** Validate message untuk pasangan gambar dual-sumber. */

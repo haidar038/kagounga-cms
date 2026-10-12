@@ -6,8 +6,12 @@ import { imageRelationField, imageUrlField, publishedOrAuth } from './shared'
 import { isAuthenticated } from './access'
 
 /**
- * Katalog produk. Cermin 1:1 field `ProductDetail` frontend
- * (`new-kagounga/src/types/content.ts`) agar adapter M4 tinggal map.
+ * Katalog produk. Cermin field `ProductDetail` frontend
+ * (`new-kagounga/src/types/content.ts`) agar adapter M4 tinggal map:
+ * detail fisik terpisah (`packaging`, `dimensions`, `netWeight`,
+ * `grossWeight`, `origin`, `shelfLife`, `certification`) + B2B
+ * (`moq`, `moqUnit`, `wholesalePriceNumber`, `wholesaleCurrency`,
+ * `wholesalePer`, `shipping`). Semua opsional, berlaku semua produk.
  * Gambar: relasi `image` (upload baru) atau `imageUrl` (Cloudinary lama).
  * Tabs/collapsible di bawah presentational saja (unnamed) — skema/API tetap.
  */
@@ -143,6 +147,100 @@ export const Products: CollectionConfig = {
                   relationName: 'image',
                   label: copy.imageUrl,
                 }),
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Details / Detail & B2B',
+          fields: [
+            {
+              type: 'collapsible',
+              label: copy.physicalDetails,
+              fields: [
+                {
+                  name: 'packaging',
+                  type: 'text',
+                  localized: true,
+                  admin: { description: copy.packaging },
+                },
+                {
+                  name: 'dimensions',
+                  type: 'text',
+                  admin: { description: copy.dimensions },
+                },
+                {
+                  name: 'netWeight',
+                  type: 'text',
+                  admin: { description: copy.netWeight },
+                },
+                {
+                  name: 'grossWeight',
+                  type: 'text',
+                  admin: { description: copy.grossWeight },
+                },
+                {
+                  name: 'origin',
+                  type: 'text',
+                  localized: true,
+                  admin: { description: copy.origin },
+                },
+                {
+                  name: 'shelfLife',
+                  type: 'text',
+                  localized: true,
+                  admin: { description: copy.shelfLife },
+                },
+                {
+                  name: 'certification',
+                  type: 'textarea',
+                  localized: true,
+                  admin: { description: copy.certification },
+                },
+              ],
+            },
+            {
+              type: 'collapsible',
+              label: copy.wholesale,
+              admin: { initCollapsed: true },
+              fields: [
+                {
+                  name: 'moq',
+                  type: 'number',
+                  min: 0,
+                  admin: { description: copy.moq },
+                },
+                {
+                  name: 'moqUnit',
+                  type: 'text',
+                  localized: true,
+                  admin: { description: copy.moqUnit },
+                },
+                {
+                  name: 'wholesalePriceNumber',
+                  type: 'number',
+                  min: 0,
+                  admin: { description: copy.wholesalePriceNumber },
+                },
+                {
+                  name: 'wholesaleCurrency',
+                  type: 'select',
+                  defaultValue: 'USD',
+                  options: ['USD', 'IDR'],
+                  admin: { description: copy.wholesaleCurrency },
+                },
+                {
+                  name: 'wholesalePer',
+                  type: 'text',
+                  localized: true,
+                  admin: { description: copy.wholesalePer },
+                },
+                {
+                  name: 'shipping',
+                  type: 'text',
+                  localized: true,
+                  admin: { description: copy.shipping },
+                },
               ],
             },
           ],

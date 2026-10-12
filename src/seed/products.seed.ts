@@ -18,6 +18,19 @@ export interface ProductSeed {
   per: string
   alt: string
   imageUrl: string
+  packaging?: string
+  dimensions?: string
+  netWeight?: string
+  grossWeight?: string
+  origin?: string
+  shelfLife?: string
+  certification?: string
+  moq?: number
+  moqUnit?: string
+  wholesalePriceNumber?: number
+  wholesaleCurrency?: 'USD' | 'IDR'
+  wholesalePer?: string
+  shipping?: string
 }
 
 const CLOUD = 'https://res.cloudinary.com/fal5otmd/image/upload/f_auto,q_auto,w_800'
@@ -32,27 +45,31 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     currency: 'USD',
     badges: ['Net 50 g', 'Halal certified', '12-month shelf life'],
     eyebrow: 'Popeda Instant · 50 g per box',
-    specs: [
-      { label: 'Dimensions', value: '10 × 4 × 6.5 cm' },
-      { label: 'Packaging', value: 'Ivory 350 g, matte laminated, tuck-top' },
-      { label: 'Net weight', value: '50 g' },
-      { label: 'Gross weight', value: '60 g' },
-      { label: 'Origin', value: 'Ternate, North Maluku, Indonesia' },
-      { label: 'HS Code', value: '1901.90.99' },
-      { label: 'Certification', value: 'Halal Indonesia (ID82410021232450325)' },
-    ],
+    specs: [{ label: 'HS Code', value: '1901.90.99' }],
     insideTitle: 'Inside the box',
     inside: [
       'Sago starch',
-      'Turmeric fish soup pasta',
-      'Dry fish',
-      'Dry vegetables',
-      'Serving suggestions',
-      '1 pcs collectible artwork',
+      'Turmeric fish soup seasoning',
+      'Dry tuna',
+      'Vegetables',
+      '1 collectible artwork',
     ],
     per: '/ box',
     alt: 'Popeda Soup',
     imageUrl: `${CLOUD}/popeda-soup.webp`,
+    packaging: '350 gsm Ivory Board, Matte Laminated, Tuck-End Box',
+    dimensions: '8.5 x 14 x 3 cm',
+    netWeight: '50 g',
+    grossWeight: '60 g',
+    origin: 'Ternate, North Maluku, Indonesia',
+    shelfLife: 'Up to 12 months',
+    certification: 'P-IRT, Halal Indonesia, Nutrition Fact, Intellectual Property Rights (IPR)',
+    moq: 200,
+    moqUnit: 'units',
+    wholesalePriceNumber: 1.9,
+    wholesaleCurrency: 'USD',
+    wholesalePer: '/ unit',
+    shipping: 'Excluded',
   },
   {
     slug: 'sago',

@@ -14,6 +14,14 @@ interface ProductOverlay {
   inside?: string[] | null
   note?: string
   per?: string
+  packaging?: string | null
+  origin?: string | null
+  shelfLife?: string | null
+  certification?: string | null
+  moqUnit?: string | null
+  wholesalePrice?: string | null
+  wholesalePer?: string | null
+  shipping?: string | null
 }
 
 /**
@@ -62,6 +70,13 @@ async function main(): Promise<void> {
           : {}),
         ...(ov.inside !== undefined && ov.inside !== null ? { inside: ov.inside } : {}),
         ...(ov.per !== undefined ? { per: ov.per } : {}),
+        ...(ov.packaging != null ? { packaging: ov.packaging } : {}),
+        ...(ov.origin != null ? { origin: ov.origin } : {}),
+        ...(ov.shelfLife != null ? { shelfLife: ov.shelfLife } : {}),
+        ...(ov.certification != null ? { certification: ov.certification } : {}),
+        ...(ov.moqUnit != null ? { moqUnit: ov.moqUnit } : {}),
+        ...(ov.wholesalePer != null ? { wholesalePer: ov.wholesalePer } : {}),
+        ...(ov.shipping != null ? { shipping: ov.shipping } : {}),
       },
       overrideAccess: true,
     })

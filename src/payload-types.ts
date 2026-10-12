@@ -275,6 +275,58 @@ export interface Product {
    * Remote URL (legacy Cloudinary). Required when image empty. / URL remote (Cloudinary lama). Wajib bila image kosong.
    */
   imageUrl?: string | null;
+  /**
+   * Box/pouch material, e.g. "350 gsm Ivory Board, Matte Laminated, Tuck-End Box". / Bahan kemasan, mis. "350 gsm Ivory Board, Matte Laminated, Tuck-End Box".
+   */
+  packaging?: string | null;
+  /**
+   * Pack dimensions, e.g. "8.5 x 14 x 3 cm". / Dimensi kemasan, mis. "8.5 x 14 x 3 cm".
+   */
+  dimensions?: string | null;
+  /**
+   * Net weight, e.g. "50 g". / Berat bersih, mis. "50 g".
+   */
+  netWeight?: string | null;
+  /**
+   * Gross weight, e.g. "60 g". / Berat kotor, mis. "60 g".
+   */
+  grossWeight?: string | null;
+  /**
+   * Country of origin, e.g. "Ternate, North Maluku, Indonesia". / Negara asal, mis. "Ternate, Maluku Utara, Indonesia".
+   */
+  origin?: string | null;
+  /**
+   * Shelf life, e.g. "Up to 12 months". / Masa simpan, mis. "Hingga 12 bulan".
+   */
+  shelfLife?: string | null;
+  /**
+   * Certifications, e.g. "P-IRT, Halal Indonesia, Nutrition Fact, IPR". / Sertifikasi, mis. "P-IRT, Halal Indonesia, Nutrition Fact, IPR".
+   */
+  certification?: string | null;
+  /**
+   * Minimum order quantity for wholesale. Empty = retail only. / Jumlah pesanan minimum grosir. Kosong = ritel saja.
+   */
+  moq?: number | null;
+  /**
+   * MOQ unit, e.g. "/ unit" or "units". / Satuan MOQ, mis. "/ unit" atau "unit".
+   */
+  moqUnit?: string | null;
+  /**
+   * Wholesale price number. Empty = no wholesale tier. / Angka harga grosir. Kosong = tanpa tier grosir.
+   */
+  wholesalePriceNumber?: number | null;
+  /**
+   * Wholesale currency. / Mata uang grosir.
+   */
+  wholesaleCurrency?: ('USD' | 'IDR') | null;
+  /**
+   * Wholesale unit, e.g. "/ unit". / Satuan grosir, mis. "/ unit".
+   */
+  wholesalePer?: string | null;
+  /**
+   * Shipping note, e.g. "Excluded" or "Excluded — buyer arranges freight". / Catatan pengiriman, mis. "Excluded".
+   */
+  shipping?: string | null;
   category?: (number | null) | Category;
   status: 'draft' | 'published';
   publishedAt?: string | null;
@@ -546,6 +598,19 @@ export interface ProductsSelect<T extends boolean = true> {
   image?: T;
   alt?: T;
   imageUrl?: T;
+  packaging?: T;
+  dimensions?: T;
+  netWeight?: T;
+  grossWeight?: T;
+  origin?: T;
+  shelfLife?: T;
+  certification?: T;
+  moq?: T;
+  moqUnit?: T;
+  wholesalePriceNumber?: T;
+  wholesaleCurrency?: T;
+  wholesalePer?: T;
+  shipping?: T;
   category?: T;
   status?: T;
   publishedAt?: T;
