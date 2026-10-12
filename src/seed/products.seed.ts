@@ -15,7 +15,7 @@ export interface ProductSeed {
   specs: Array<{ label: string; value: string }>
   insideTitle?: string
   inside?: string[]
-  per: string
+  per: 'box' | 'pack' | 'pouch' | 'unit'
   alt: string
   imageUrl: string
   packaging?: string
@@ -26,11 +26,11 @@ export interface ProductSeed {
   shelfLife?: string
   certification?: string
   moq?: number
-  moqUnit?: string
+  moqUnit?: 'box' | 'boxes' | 'pack' | 'packs' | 'pouch' | 'pouches' | 'unit' | 'units'
   wholesalePriceNumber?: number
   wholesaleCurrency?: 'USD' | 'IDR'
-  wholesalePer?: string
-  shipping?: string
+  wholesalePer?: 'box' | 'boxes' | 'pack' | 'packs' | 'pouch' | 'pouches' | 'unit' | 'units'
+  shipping?: 'Excluded' | 'Included'
 }
 
 const CLOUD = 'https://res.cloudinary.com/fal5otmd/image/upload/f_auto,q_auto,w_800'
@@ -54,7 +54,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
       'Vegetables',
       '1 collectible artwork',
     ],
-    per: '/ box',
+    per: 'box',
     alt: 'Popeda Soup',
     imageUrl: `${CLOUD}/popeda-soup.webp`,
     packaging: '350 gsm Ivory Board, Matte Laminated, Tuck-End Box',
@@ -68,7 +68,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     moqUnit: 'units',
     wholesalePriceNumber: 1.9,
     wholesaleCurrency: 'USD',
-    wholesalePer: '/ unit',
+    wholesalePer: 'unit',
     shipping: 'Excluded',
   },
   {
@@ -89,7 +89,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
       { label: 'HS Code', value: '1108.19.10' },
       { label: 'Certification', value: 'Halal Indonesia (ID82410021232450325)' },
     ],
-    per: '/ pouch',
+    per: 'pouch',
     alt: 'Sago Starch',
     imageUrl: `${CLOUD}/sagu-starch.webp`,
   },
@@ -109,7 +109,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
       { label: 'Gross weight', value: '110 g' },
       { label: 'Origin', value: 'Ternate, North Maluku, Indonesia' },
     ],
-    per: '/ pouch',
+    per: 'pouch',
     alt: 'Dried Tuna',
     imageUrl: `${CLOUD}/driedtuna.webp`,
   },
@@ -131,7 +131,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     ],
     insideTitle: 'Blended with',
     inside: ['Turmeric', 'Dried fish powder', 'Sea salt', 'Mixed spices'],
-    per: '/ pack',
+    per: 'pack',
     alt: 'Turmeric Fish Seasoning',
     imageUrl: `${CLOUD}/kunyit.webp`,
   },
@@ -152,7 +152,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     ],
     insideTitle: 'Roasted with',
     inside: ['Roasted kenari nuts', 'Sea salt'],
-    per: '/ pouch',
+    per: 'pouch',
     alt: 'Kenari Nut',
     imageUrl: `${CLOUD}/kenari-nut.webp`,
   },
@@ -173,7 +173,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     ],
     insideTitle: 'Contents',
     inside: ['Dried butterfly pea flowers'],
-    per: '/ pouch',
+    per: 'pouch',
     alt: 'Butterfly Pea Flower',
     imageUrl: `${CLOUD}/bungatelang.webp`,
   },
@@ -194,7 +194,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     ],
     insideTitle: 'Contents',
     inside: ['Whole nutmeg', 'Mace (fuli)'],
-    per: '/ pouch',
+    per: 'pouch',
     alt: 'Nutmeg / Mace',
     imageUrl: `${CLOUD}/palafuli.webp`,
   },
@@ -215,7 +215,7 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     ],
     insideTitle: 'Contents',
     inside: ['Whole dried cloves'],
-    per: '/ pouch',
+    per: 'pouch',
     alt: 'Clove',
     imageUrl: `${CLOUD}/cengkih.webp`,
   },

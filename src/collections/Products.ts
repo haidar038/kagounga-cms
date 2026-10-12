@@ -61,8 +61,9 @@ export const Products: CollectionConfig = {
             },
             {
               name: 'per',
-              type: 'text',
+              type: 'select',
               localized: true,
+              options: ['box', 'pack', 'pouch', 'unit'],
               admin: { description: copy.per },
             },
             {
@@ -99,6 +100,7 @@ export const Products: CollectionConfig = {
               name: 'specs',
               type: 'array',
               localized: true,
+              admin: { description: copy.specsProduct },
               fields: [
                 { name: 'label', type: 'text', required: true },
                 { name: 'value', type: 'text', required: true },
@@ -212,8 +214,18 @@ export const Products: CollectionConfig = {
                 },
                 {
                   name: 'moqUnit',
-                  type: 'text',
+                  type: 'select',
                   localized: true,
+                  options: [
+                    'box',
+                    'boxes',
+                    'pack',
+                    'packs',
+                    'pouch',
+                    'pouches',
+                    'unit',
+                    'units',
+                  ],
                   admin: { description: copy.moqUnit },
                 },
                 {
@@ -231,14 +243,25 @@ export const Products: CollectionConfig = {
                 },
                 {
                   name: 'wholesalePer',
-                  type: 'text',
+                  type: 'select',
                   localized: true,
+                  options: [
+                    'box',
+                    'boxes',
+                    'pack',
+                    'packs',
+                    'pouch',
+                    'pouches',
+                    'unit',
+                    'units',
+                  ],
                   admin: { description: copy.wholesalePer },
                 },
                 {
                   name: 'shipping',
-                  type: 'text',
+                  type: 'select',
                   localized: true,
+                  options: ['Excluded', 'Included'],
                   admin: { description: copy.shipping },
                 },
               ],

@@ -13,15 +13,15 @@ interface ProductOverlay {
   insideTitle?: string | null
   inside?: string[] | null
   note?: string
-  per?: string
+  per?: 'box' | 'pack' | 'pouch' | 'unit'
   packaging?: string | null
   origin?: string | null
   shelfLife?: string | null
   certification?: string | null
-  moqUnit?: string | null
+  moqUnit?: 'box' | 'boxes' | 'pack' | 'packs' | 'pouch' | 'pouches' | 'unit' | 'units' | null
   wholesalePrice?: string | null
-  wholesalePer?: string | null
-  shipping?: string | null
+  wholesalePer?: 'box' | 'boxes' | 'pack' | 'packs' | 'pouch' | 'pouches' | 'unit' | 'units' | null
+  shipping?: 'Excluded' | 'Included' | null
 }
 
 /**

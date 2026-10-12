@@ -241,9 +241,9 @@ export interface Product {
   priceNumber: number;
   currency: 'USD' | 'IDR';
   /**
-   * Price unit, e.g. "/ box". / Satuan harga, mis. "/ box".
+   * Dropdown unit, e.g. "box". Rendered as "/ box" in frontend. / Dropdown satuan, mis. "box". Dirender "/ box" di frontend.
    */
-  per?: string | null;
+  per?: ('box' | 'pack' | 'pouch' | 'unit') | null;
   badges?: string[] | null;
   eyebrow?: string | null;
   /**
@@ -254,6 +254,9 @@ export interface Product {
    * Product dialog note. / Catatan dialog produk.
    */
   note: string;
+  /**
+   * Extra rows only (e.g. HS Code). Attributes covered by the Details tab auto-hide here in the frontend when both are filled. / Baris tambahan saja (mis. HS Code). Atribut yang sudah ada di tab Details otomatis disembunyikan di frontend bila keduanya diisi.
+   */
   specs?:
     | {
         label: string;
@@ -308,9 +311,9 @@ export interface Product {
    */
   moq?: number | null;
   /**
-   * MOQ unit, e.g. "/ unit" or "units". / Satuan MOQ, mis. "/ unit" atau "unit".
+   * Dropdown MOQ unit: box/boxes, pack/packs, pouch/pouches, unit/units. / Dropdown satuan MOQ.
    */
-  moqUnit?: string | null;
+  moqUnit?: ('box' | 'boxes' | 'pack' | 'packs' | 'pouch' | 'pouches' | 'unit' | 'units') | null;
   /**
    * Wholesale price number. Empty = no wholesale tier. / Angka harga grosir. Kosong = tanpa tier grosir.
    */
@@ -320,13 +323,13 @@ export interface Product {
    */
   wholesaleCurrency?: ('USD' | 'IDR') | null;
   /**
-   * Wholesale unit, e.g. "/ unit". / Satuan grosir, mis. "/ unit".
+   * Dropdown wholesale unit, same options as MOQ unit. / Dropdown satuan grosir, opsi sama dengan MOQ unit.
    */
-  wholesalePer?: string | null;
+  wholesalePer?: ('box' | 'boxes' | 'pack' | 'packs' | 'pouch' | 'pouches' | 'unit' | 'units') | null;
   /**
-   * Shipping note, e.g. "Excluded" or "Excluded — buyer arranges freight". / Catatan pengiriman, mis. "Excluded".
+   * Dropdown: "Excluded" or "Included". / Dropdown: "Excluded" atau "Included".
    */
-  shipping?: string | null;
+  shipping?: ('Excluded' | 'Included') | null;
   category?: (number | null) | Category;
   status: 'draft' | 'published';
   publishedAt?: string | null;
