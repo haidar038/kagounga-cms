@@ -1,17 +1,71 @@
-// Kagounga token parity (M12) — mirror frontend `new-kagounga/src/index.css` @theme.
-// cream #F3F1E9, ink #1F2C22, lime #DBF066, font Open Sauce One.
-// Sengaja minimal (font + radius + selection): warna elevation Payload
-// (light/dark) tak disentuh agar kontras bawaan tetap aman saat upgrade.
+// Kagounga token parity (W2) — palet cream/ink/lime mirror frontend `new-kagounga/src/index.css`.
+// Override: permukaan elevation 0–200 + foreground 800, theme bg/text/input, ramp `--color-success-*` (lime/olive).
+// Elevation 250–750 (teks muted, hover, border netral) dibiarkan → kontras teks bawaan tak berubah.
 @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
 
 :root {
+  --kga-cream: #f3f1e9;
+  --kga-paper: #fafafa;
+  --kga-ink: #1f2c22;
+  --kga-lime: #dbf066;
+
   --font-body: 'Open Sauce One', ui-sans-serif, system-ui, sans-serif;
   --style-radius-s: 12px;
   --style-radius-m: 16px;
   --style-radius-l: 24px;
+
+  // Light — permukaan hangat + foreground ink
+  --theme-bg: var(--kga-cream);
+  --theme-input-bg: var(--kga-paper);
+  --theme-text: var(--kga-ink);
+  --theme-elevation-0: var(--kga-paper);
+  --theme-elevation-50: #edeade;
+  --theme-elevation-100: #e3dfd0;
+  --theme-elevation-150: #d5d0bd;
+  --theme-elevation-200: #c7c1aa;
+  --theme-elevation-800: var(--kga-ink);
+
+  // success → lime/olive (pill "published", toast, ring fokus)
+  --color-success-50: #f8fbe4;
+  --color-success-100: #f1f7c8;
+  --color-success-150: #e8f2ab;
+  --color-success-200: #deee8b;
+  --color-success-250: #d4e86a;
+  --color-success-300: #c7de4b;
+  --color-success-350: #b7ce3b;
+  --color-success-400: #a7bc2f;
+  --color-success-450: #96ab28;
+  --color-success-500: #7e8f20;
+  --color-success-550: #77871e;
+  --color-success-600: #5f6d18;
+  --color-success-650: #515d14;
+  --color-success-700: #434d11;
+  --color-success-750: #363e0e;
+  --color-success-800: #2a300b;
+  --color-success-850: #1e2308;
+  --color-success-900: #141805;
+  --color-success-950: #0b0e03;
+}
+
+html[data-theme='dark'] {
+  // Dark — ink sebagai kanvas, panel sedikit lebih terang
+  --theme-bg: #131c17;
+  --theme-input-bg: var(--kga-ink);
+  --theme-text: var(--kga-cream);
+  --theme-elevation-0: #16211a;
+  --theme-elevation-50: var(--kga-ink);
+  --theme-elevation-100: #27352b;
+  --theme-elevation-150: #2f4034;
+  --theme-elevation-200: #3a4c3f;
+  --theme-elevation-800: var(--kga-cream);
 }
 
 ::selection {
-  background: #1f2c22;
-  color: #dbf066;
+  background: var(--kga-ink);
+  color: var(--kga-lime);
+}
+
+html[data-theme='dark'] ::selection {
+  background: var(--kga-lime);
+  color: var(--kga-ink);
 }
