@@ -76,12 +76,32 @@ const emailAdapter = process.env.RESEND_API_KEY
 export default buildConfig({
   admin: {
     user: Users.slug,
+    avatar: 'default',
+    dateFormat: 'd MMM yyyy',
     importMap: {
       baseDir: path.resolve(dirname),
     },
     meta: {
       titleSuffix: '— Kagounga CMS',
       description: 'Kagounga CMS — manage catalog and news.',
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          url: 'https://kagounga.com/favicon/favicon.svg',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '96x96',
+          url: 'https://kagounga.com/favicon/favicon-96x96.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          type: 'image/png',
+          url: 'https://kagounga.com/favicon/apple-touch-icon.png',
+        },
+      ],
     },
   },
   collections: [Users, Media, Categories, Products, Posts],
