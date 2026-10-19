@@ -25,6 +25,9 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { PostCoverPreview as PostCoverPreview_a3e8db10b870479131452d5cd3f7f3ed } from '@/admin/ImagePreview'
 import { PostThumbCell as PostThumbCell_476b32fd660660b4bfd684315b267e46 } from '@/admin/ImageThumbCell'
+import { BrandIcon as BrandIcon_6c8e8cae2717774e46862bcc2b3da48b } from '@/admin/BrandIcon'
+import { BrandLogo as BrandLogo_2754bba07717ba6d79462d3ff1b5444e } from '@/admin/BrandLogo'
+import { ViewSiteLink as ViewSiteLink_6b24bc41c1c5022e223a913ed6e57fc6 } from '@/admin/ViewSiteLink'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 
@@ -57,6 +60,9 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/admin/ImagePreview#PostCoverPreview": PostCoverPreview_a3e8db10b870479131452d5cd3f7f3ed,
   "@/admin/ImageThumbCell#PostThumbCell": PostThumbCell_476b32fd660660b4bfd684315b267e46,
+  "@/admin/BrandIcon#BrandIcon": BrandIcon_6c8e8cae2717774e46862bcc2b3da48b,
+  "@/admin/BrandLogo#BrandLogo": BrandLogo_2754bba07717ba6d79462d3ff1b5444e,
+  "@/admin/ViewSiteLink#ViewSiteLink": ViewSiteLink_6b24bc41c1c5022e223a913ed6e57fc6,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24
 }

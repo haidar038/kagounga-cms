@@ -77,6 +77,13 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     avatar: 'default',
+    components: {
+      graphics: {
+        Logo: '@/admin/BrandLogo#BrandLogo',
+        Icon: '@/admin/BrandIcon#BrandIcon',
+      },
+      beforeNavLinks: ['@/admin/ViewSiteLink#ViewSiteLink'],
+    },
     dateFormat: 'd MMM yyyy',
     importMap: {
       baseDir: path.resolve(dirname),

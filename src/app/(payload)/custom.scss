@@ -69,3 +69,43 @@ html[data-theme='dark'] ::selection {
   background: var(--kga-lime);
   color: var(--kga-ink);
 }
+
+// W3 — brand: logo login + ikon nav (aset currentColor → difilter di tema gelap).
+.kga-brand-logo {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+
+.kga-brand-icon {
+  display: block;
+  height: 18px;
+  width: 18px;
+  object-fit: contain;
+}
+
+html[data-theme='dark'] .kga-brand-logo {
+  filter: invert(1);
+}
+
+html[data-theme='dark'] .kga-brand-icon {
+  filter: brightness(0) invert(1);
+}
+
+// W3 — slot beforeNavLinks: tautan ke situs publik.
+.kga-view-site {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  padding-block: 4px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: var(--theme-elevation-800);
+  opacity: 0.65;
+  text-decoration: none;
+}
+
+.kga-view-site:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
