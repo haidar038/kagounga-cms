@@ -84,6 +84,30 @@ export default buildConfig({
       },
       beforeNavLinks: ['@/admin/ViewSiteLink#ViewSiteLink'],
     },
+    dashboard: {
+      widgets: [
+        {
+          slug: 'catalog-summary',
+          Component: '@/admin/CatalogSummaryWidget#CatalogSummaryWidget',
+          label: { en: 'Catalog summary', id: 'Ringkasan katalog' },
+          minWidth: 'small',
+          maxWidth: 'full',
+        },
+        {
+          slug: 'wholesale-gaps',
+          Component: '@/admin/WholesaleGapsWidget#WholesaleGapsWidget',
+          label: { en: 'Wholesale data gaps', id: 'Data grosir belum lengkap' },
+          minWidth: 'small',
+          maxWidth: 'full',
+        },
+      ],
+      // Susunan awal: koleksi + 2 widget (W-014). Preferensi user tersimpan menang.
+      defaultLayout: [
+        { widgetSlug: 'collections', width: 'full' },
+        { widgetSlug: 'catalog-summary', width: 'medium' },
+        { widgetSlug: 'wholesale-gaps', width: 'medium' },
+      ],
+    },
     dateFormat: 'd MMM yyyy',
     importMap: {
       baseDir: path.resolve(dirname),

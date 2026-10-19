@@ -97,6 +97,8 @@ export interface Config {
   globalsSelect: {};
   locale: 'en' | 'id';
   widgets: {
+    'catalog-summary': CatalogSummaryWidget;
+    'wholesale-gaps': WholesaleGapsWidget;
     collections: CollectionsWidget;
   };
   user: User;
@@ -682,6 +684,26 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "catalog-summary_widget".
+ */
+export interface CatalogSummaryWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'small' | 'medium' | 'large' | 'x-large' | 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wholesale-gaps_widget".
+ */
+export interface WholesaleGapsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'small' | 'medium' | 'large' | 'x-large' | 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

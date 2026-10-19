@@ -28,6 +28,8 @@ import { PostThumbCell as PostThumbCell_476b32fd660660b4bfd684315b267e46 } from 
 import { BrandIcon as BrandIcon_6c8e8cae2717774e46862bcc2b3da48b } from '@/admin/BrandIcon'
 import { BrandLogo as BrandLogo_2754bba07717ba6d79462d3ff1b5444e } from '@/admin/BrandLogo'
 import { ViewSiteLink as ViewSiteLink_6b24bc41c1c5022e223a913ed6e57fc6 } from '@/admin/ViewSiteLink'
+import { CatalogSummaryWidget as CatalogSummaryWidget_95b3ca8ea23b25d0cba8321b15941373 } from '@/admin/CatalogSummaryWidget'
+import { WholesaleGapsWidget as WholesaleGapsWidget_48f477d67425a1f6d125ae5179264360 } from '@/admin/WholesaleGapsWidget'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 
@@ -63,6 +65,8 @@ export const importMap = {
   "@/admin/BrandIcon#BrandIcon": BrandIcon_6c8e8cae2717774e46862bcc2b3da48b,
   "@/admin/BrandLogo#BrandLogo": BrandLogo_2754bba07717ba6d79462d3ff1b5444e,
   "@/admin/ViewSiteLink#ViewSiteLink": ViewSiteLink_6b24bc41c1c5022e223a913ed6e57fc6,
+  "@/admin/CatalogSummaryWidget#CatalogSummaryWidget": CatalogSummaryWidget_95b3ca8ea23b25d0cba8321b15941373,
+  "@/admin/WholesaleGapsWidget#WholesaleGapsWidget": WholesaleGapsWidget_48f477d67425a1f6d125ae5179264360,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24
 }

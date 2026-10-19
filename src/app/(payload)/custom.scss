@@ -109,3 +109,112 @@ html[data-theme='dark'] .kga-brand-icon {
   opacity: 1;
   text-decoration: underline;
 }
+
+// W4 — widget dashboard: ringkasan katalog + kelengkapan data grosir.
+.kga-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.kga-widget__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kga-widget__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--theme-text);
+}
+
+.kga-widget__subtitle,
+.kga-widget__empty,
+.kga-widget__more {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--theme-elevation-600);
+}
+
+.kga-widget__stats {
+  display: flex;
+  gap: 32px;
+}
+
+.kga-widget__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kga-widget__stat-value {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--theme-text);
+}
+
+.kga-widget__stat-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-600);
+}
+
+.kga-widget__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--theme-elevation-400);
+}
+
+.kga-widget__dot--published {
+  background: var(--color-success-500);
+}
+
+.kga-widget__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kga-widget__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.kga-widget__row a {
+  color: var(--theme-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--theme-elevation-150);
+}
+
+.kga-widget__row a:hover {
+  border-bottom-color: var(--theme-elevation-400);
+}
+
+.kga-widget__missing {
+  flex-shrink: 0;
+  font-size: 11.5px;
+  color: var(--theme-elevation-600);
+}
+
+.kga-widget__link {
+  margin-top: auto;
+  font-size: 12.5px;
+  color: var(--theme-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
