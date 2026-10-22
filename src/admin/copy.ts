@@ -6,6 +6,10 @@
 export const copy = {
   excerptProduct: 'Card blurb. / Blurb kartu katalog.',
   noteProduct: 'Product dialog note. / Catatan dialog produk.',
+  introProduct: 'About section paragraphs, one paragraph per row. / Paragraf section About, satu paragraf per baris.',
+  usageProduct: 'How to Use section. / Section How to Use.',
+  sourcingProduct: 'Sourcing section. / Section Sourcing.',
+  seoTitleProduct: 'Unique title tag for this product page. / Judul SEO unik halaman produk.',
   specsProduct: 'Extra rows only (e.g. HS Code). Attributes covered by the Details tab auto-hide here in the frontend when both are filled. / Baris tambahan saja (mis. HS Code). Atribut yang sudah ada di tab Details otomatis disembunyikan di frontend bila keduanya diisi.',
   priceNumber: 'Numeric price. Currency rendered in frontend. / Harga angka. Mata uang dirender di frontend.',
   per: 'Dropdown unit, e.g. "box". Rendered as "/ box" in frontend. / Dropdown satuan, mis. "box". Dirender "/ box" di frontend.',

@@ -8,6 +8,12 @@ let payload: Payload
 const PUBLISHED_SLUG = 'spec-produk-a'
 const DRAFT_SLUG = 'spec-produk-draft'
 const SLUGS = [PUBLISHED_SLUG, DRAFT_SLUG]
+const PAGE_COPY = {
+  intro: ['intro paragraph'],
+  usage: 'usage',
+  sourcing: 'sourcing',
+  seoTitle: 'Product SEO title',
+}
 
 /** Butuh Postgres jalan. Fixture dibuat + dibersihkan di sini. */
 describe('Products', () => {
@@ -27,6 +33,7 @@ describe('Products', () => {
         slug: PUBLISHED_SLUG,
         excerpt: 'excerpt',
         note: 'note',
+        ...PAGE_COPY,
         priceNumber: 1,
         currency: 'USD',
         status: 'published',
@@ -41,6 +48,7 @@ describe('Products', () => {
         slug: DRAFT_SLUG,
         excerpt: 'excerpt',
         note: 'note',
+        ...PAGE_COPY,
         priceNumber: 1,
         currency: 'USD',
         status: 'draft',

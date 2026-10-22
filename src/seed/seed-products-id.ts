@@ -3,7 +3,7 @@ import 'dotenv/config'
 import { getPayload } from 'payload'
 
 import config from '../payload.config.js'
-import { PRODUCTS_SEED } from './products.seed.js'
+import { PRODUCTS_SEED, PRODUCT_PAGE_SOURCE } from './products.seed.js'
 
 interface ProductOverlay {
   blurb?: string
@@ -41,7 +41,9 @@ async function main(): Promise<void> {
 
   for (const seed of PRODUCTS_SEED) {
     const ov = overlays[seed.slug]
-    if (!ov?.blurb || !ov.note) {
+    const page = PRODUCT_PAGE_SOURCE.pages[seed.slug]?.id
+    const seoTitle = PRODUCT_PAGE_SOURCE.seoTitles[seed.slug]?.id
+    if (!ov?.blurb || !ov.note || !page || !seoTitle) {
       payload.logger.warn(`skip ${seed.slug}: overlay ID tak lengkap`)
       continue
     }
@@ -62,6 +64,10 @@ async function main(): Promise<void> {
       data: {
         excerpt: ov.blurb,
         note: ov.note,
+        intro: page.intro,
+        usage: page.usage,
+        sourcing: page.sourcing,
+        seoTitle,
         ...(ov.eyebrow !== undefined ? { eyebrow: ov.eyebrow } : {}),
         ...(ov.badges !== undefined ? { badges: ov.badges } : {}),
         ...(ov.specs !== undefined ? { specs: ov.specs } : {}),

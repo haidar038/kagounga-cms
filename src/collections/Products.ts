@@ -120,6 +120,45 @@ export const Products: CollectionConfig = {
           ],
         },
         {
+          label: 'Product Page / Halaman Produk',
+          fields: [
+            {
+              name: 'intro',
+              type: 'text',
+              hasMany: true,
+              required: true,
+              localized: true,
+              admin: { description: copy.introProduct },
+            },
+            {
+              name: 'usage',
+              type: 'textarea',
+              required: true,
+              localized: true,
+              admin: { description: copy.usageProduct },
+            },
+            {
+              name: 'sourcing',
+              type: 'textarea',
+              required: true,
+              localized: true,
+              admin: { description: copy.sourcingProduct },
+            },
+          ],
+        },
+        {
+          label: 'SEO',
+          fields: [
+            {
+              name: 'seoTitle',
+              type: 'text',
+              required: true,
+              localized: true,
+              admin: { description: copy.seoTitleProduct },
+            },
+          ],
+        },
+        {
           label: 'Media',
           fields: [
             imageRelationField({ name: 'image', label: copy.imageRelation }),

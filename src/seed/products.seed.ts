@@ -1,13 +1,40 @@
+import { readFileSync } from 'node:fs'
+
 /**
  * Seed 8 produk dari `new-kagounga/src/data/products.ts` (EN base).
  * Gambar pakai URL Cloudinary lama (`imageUrl`), tanpa upload.
- * Overlay ID + lokalisasi field menyusul M3. Dijalankan via `seed:products`.
+ * Long-form page copy dibaca dari JSON yang sama dengan frontend.
+ * Dijalankan via `seed:products`.
  */
+interface ProductPageSource {
+  pages: Record<
+    string,
+    {
+      en: { intro: string[]; usage: string; sourcing: string }
+      id: { intro: string[]; usage: string; sourcing: string }
+    }
+  >
+  seoTitles: Record<string, { en: string; id: string }>
+}
+
+const PAGE_SOURCE = JSON.parse(
+  readFileSync(
+    new URL('../../../new-kagounga/src/data/productPageCopy.json', import.meta.url),
+    'utf8',
+  ),
+) as ProductPageSource
+
+export const PRODUCT_PAGE_SOURCE = PAGE_SOURCE
+
 export interface ProductSeed {
   slug: string
   title: string
   excerpt: string
   note: string
+  intro: string[]
+  usage: string
+  sourcing: string
+  seoTitle: string
   priceNumber: number
   currency: 'USD'
   badges: string[]
@@ -35,7 +62,9 @@ export interface ProductSeed {
 
 const CLOUD = 'https://res.cloudinary.com/fal5otmd/image/upload/f_auto,q_auto,w_800'
 
-export const PRODUCTS_SEED: ProductSeed[] = [
+type RawProductSeed = Omit<ProductSeed, 'intro' | 'usage' | 'sourcing' | 'seoTitle'>
+
+const RAW_PRODUCTS_SEED: RawProductSeed[] = [
   {
     slug: 'popeda',
     title: 'Popeda Soup',
@@ -220,3 +249,18 @@ export const PRODUCTS_SEED: ProductSeed[] = [
     imageUrl: `${CLOUD}/cengkih.webp`,
   },
 ]
+
+export const PRODUCTS_SEED: ProductSeed[] = RAW_PRODUCTS_SEED.map((seed) => {
+  const page = PAGE_SOURCE.pages[seed.slug]?.en
+  const seoTitle = PAGE_SOURCE.seoTitles[seed.slug]?.en
+  if (!page || !seoTitle) {
+    throw new Error(`Missing product page copy for ${seed.slug}`)
+  }
+  return {
+    ...seed,
+    intro: page.intro,
+    usage: page.usage,
+    sourcing: page.sourcing,
+    seoTitle,
+  }
+})

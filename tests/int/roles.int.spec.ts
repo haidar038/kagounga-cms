@@ -13,6 +13,12 @@ let payload: Payload
 const ADMIN = { email: 'role-admin-test@kagounga.com', password: 'test-admin-123' }
 const EDITOR = { email: 'role-editor-test@kagounga.com', password: 'test-editor-123' }
 const PRODUCT_SLUG = 'spec-role-product'
+const PAGE_COPY = {
+  intro: ['intro paragraph'],
+  usage: 'usage',
+  sourcing: 'sourcing',
+  seoTitle: 'Product SEO title',
+}
 
 let adminUser: any
 let editorUser: any
@@ -75,6 +81,7 @@ describe('Roles', () => {
           slug: PRODUCT_SLUG,
           excerpt: 'excerpt',
           note: 'note',
+          ...PAGE_COPY,
           priceNumber: 1,
           currency: 'USD',
           status: 'draft',
@@ -94,6 +101,7 @@ describe('Roles', () => {
         slug: PRODUCT_SLUG,
         excerpt: 'excerpt',
         note: 'note',
+        ...PAGE_COPY,
         priceNumber: 1,
         currency: 'USD',
         status: 'published',

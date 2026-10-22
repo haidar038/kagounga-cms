@@ -269,6 +269,22 @@ export interface Product {
   insideTitle?: string | null;
   inside?: string[] | null;
   /**
+   * About section paragraphs, one paragraph per row. / Paragraf section About, satu paragraf per baris.
+   */
+  intro: string[];
+  /**
+   * How to Use section. / Section How to Use.
+   */
+  usage: string;
+  /**
+   * Sourcing section. / Section Sourcing.
+   */
+  sourcing: string;
+  /**
+   * Unique title tag for this product page. / Judul SEO unik halaman produk.
+   */
+  seoTitle: string;
+  /**
    * New upload. Empty when using imageUrl. / Upload baru. Kosong bila pakai imageUrl.
    */
   image?: (number | null) | Media;
@@ -600,6 +616,10 @@ export interface ProductsSelect<T extends boolean = true> {
       };
   insideTitle?: T;
   inside?: T;
+  intro?: T;
+  usage?: T;
+  sourcing?: T;
+  seoTitle?: T;
   image?: T;
   alt?: T;
   imageUrl?: T;

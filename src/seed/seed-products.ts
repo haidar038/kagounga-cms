@@ -11,6 +11,7 @@ import { PRODUCTS_SEED } from './products.seed.js'
 async function main(): Promise<void> {
   const payload = await getPayload({ config })
   let created = 0
+  let updated = 0
 
   for (const [index, seed] of PRODUCTS_SEED.entries()) {
     const existing = await payload.find({
@@ -20,7 +21,20 @@ async function main(): Promise<void> {
       overrideAccess: true,
     })
     if (existing.totalDocs > 0) {
-      payload.logger.info(`skip ${seed.slug}: sudah ada`)
+      // Backfill only the new page-copy fields; don't overwrite catalog edits.
+      await payload.update({
+        collection: 'products',
+        id: existing.docs[0].id,
+        data: {
+          intro: seed.intro,
+          usage: seed.usage,
+          sourcing: seed.sourcing,
+          seoTitle: seed.seoTitle,
+        },
+        overrideAccess: true,
+      })
+      updated += 1
+      payload.logger.info(`updated page copy: ${seed.slug}`)
       continue
     }
     await payload.create({
@@ -37,7 +51,9 @@ async function main(): Promise<void> {
     payload.logger.info(`created ${seed.slug}`)
   }
 
-  payload.logger.info(`selesai: ${created} baru, ${PRODUCTS_SEED.length - created} skip`)
+  payload.logger.info(
+    `selesai: ${created} baru, ${updated} page copy diperbarui, ${PRODUCTS_SEED.length - created - updated} skip`,
+  )
 }
 
 main()
