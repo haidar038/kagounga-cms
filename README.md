@@ -24,6 +24,12 @@ Admin + API untuk konten `new-kagounga` (target M2 Produk, M3 Berita). Status M3
 | `NEXT_PUBLIC_CMS_URL` | `http://localhost:3000` | base URL dipakai frontend |
 | `CORS_ORIGIN` | `http://localhost:5173` | origin frontend (koma bila >1) |
 
+## Peringatan DB prod
+`.env` lokal saat ini menunjuk **DB prod** lewat pooler, bukan localhost.
+Sebelum `dev`/seed, pastikan target: override `DATABASE_URL` ke Postgres lokal
+untuk pekerjaan dev. Migration/seed prod hanya dengan backup + niat.
+Seed prod wajib `NODE_ENV=production`; tanpa itu Payload dev-push ke prod.
+
 ## API smoke (M1)
 - `GET http://localhost:3000/api/media?limit=1` → publik, expect `{docs,totalDocs,...}`.
 - `GET http://localhost:3000/api/users` → butuh login (expect 401).
@@ -33,6 +39,7 @@ Admin + API untuk konten `new-kagounga` (target M2 Produk, M3 Berita). Status M3
 - `dev` / `build` / `start` — Next + Payload.
 - `generate:types` — regen `src/payload-types.ts` tiap ubah koleksi.
 - `generate:importmap` — regen admin import map.
+- `seed:products` / `seed:products:id` — backfill page copy produk (jalankan dengan `NODE_ENV=production` untuk prod).
 - `test:int` (vitest) / `test:e2e` (playwright, butuh `pnpm dev` + browser).
 
 ## Catatan M1
