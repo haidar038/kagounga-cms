@@ -1,4 +1,6 @@
 import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import 'dotenv/config'
 import { getPayload } from 'payload'
 
@@ -27,13 +29,16 @@ interface ProductOverlay {
 /**
  * Isi locale ID untuk 8 produk dari overlay `new-kagounga/src/locales/id/catalog.json`.
  * Idempoten (timpa ulang aman). Update locale wajib semua required field (excerpt, note).
- * Jalan: `bun run seed:products:id [path-ke-id-catalog.json]`
+ * Jalan: `pnpm seed:products:id [path-ke-id-catalog.json]`
+ * Sumber default: `$KGA_FRONTEND_DIR/src/locales/id/catalog.json`, fallback path
+ * relatif workspace `../../../new-kagounga` (D-033).
  * (butuh DATABASE_URL + PAYLOAD_SECRET).
  */
 async function main(): Promise<void> {
   const fromArg = process.argv[2]
-  const source =
-    fromArg ?? new URL('../../../new-kagounga/src/locales/id/catalog.json', import.meta.url)
+  const frontendDir =
+    process.env.KGA_FRONTEND_DIR ?? path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../new-kagounga')
+  const source = fromArg ?? path.join(frontendDir, 'src/locales/id/catalog.json')
   const overlays = (JSON.parse(readFileSync(source, 'utf8')) as { products?: Record<string, ProductOverlay> })
     .products ?? {}
   const payload = await getPayload({ config })

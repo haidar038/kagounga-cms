@@ -1,4 +1,6 @@
 import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import 'dotenv/config'
 import { getPayload } from 'payload'
 
@@ -26,12 +28,16 @@ interface NewsSource {
 /**
  * Seed berita dari `new-kagounga/src/data/news.json` (snapshot M3).
  * EN = create, ID = update locale 'id'. Idempoten via cek slug.
- * Jalan: `bun run seed:posts [path-ke-news.json]`
+ * Jalan: `pnpm seed:posts [path-ke-news.json]`
+ * Sumber default: `$KGA_FRONTEND_DIR/src/data/news.json`, fallback path
+ * relatif workspace `../../../new-kagounga` (D-033).
  * (butuh DATABASE_URL + PAYLOAD_SECRET).
  */
 async function main(): Promise<void> {
   const fromArg = process.argv[2]
-  const source = fromArg ?? new URL('../../../new-kagounga/src/data/news.json', import.meta.url)
+  const frontendDir =
+    process.env.KGA_FRONTEND_DIR ?? path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../new-kagounga')
+  const source = fromArg ?? path.join(frontendDir, 'src/data/news.json')
   const posts = JSON.parse(readFileSync(source, 'utf8')) as NewsSource[]
   const payload = await getPayload({ config })
   let created = 0
