@@ -1,51 +1,19 @@
-import * as migration_20261010_120000_products_localization from './20261010_120000_products_localization';
-import * as migration_20261010_181046_users_roles from './20261010_181046_users_roles';
-import * as migration_20261012_023059 from './20261012_023059';
-import * as migration_20261012_034025 from './20261012_034025';
-import * as migration_20261012_041000_enable_rls from './20261012_041000_enable_rls';
-import * as migration_20261018_134837_fk_indexes from './20261018_134837_fk_indexes';
-import * as migration_20261022_000000_product_page_copy from './20261022_000000_product_page_copy';
-import * as migration_20261023_000000_stockist_cities from './20261023_000000_stockist_cities';
+import * as migration_20261024_000000_baseline from './20261024_000000_baseline';
 
+/**
+ * Baseline squash (T-M15-12/D-035): satu-satunya migrasi aktif.
+ *
+ * CATATAN RUNTIME: Payload menjalankan SEMUA file .ts di folder ini (sorted,
+ * `index.ts` diabaikan — lihat `payload/dist/database/migrations/
+ * readMigrationFiles.js`). Karena itu 8 file migrasi lama (M2–M14) dipindah
+ * ke `history/` sebagai arsip: mereka asumsikan dev-push awal (tipe enum
+ * `_locales` dsb.) sehingga tak replayable dari DB kosong. Baseline
+ * idempoten: DB kosong dibangun penuh; DB existing di-skip (hanya RLS).
+ */
 export const migrations = [
   {
-    up: migration_20261010_120000_products_localization.up,
-    down: migration_20261010_120000_products_localization.down,
-    name: '20261010_120000_products_localization',
-  },
-  {
-    up: migration_20261010_181046_users_roles.up,
-    down: migration_20261010_181046_users_roles.down,
-    name: '20261010_181046_users_roles',
-  },
-  {
-    up: migration_20261012_023059.up,
-    down: migration_20261012_023059.down,
-    name: '20261012_023059',
-  },
-  {
-    up: migration_20261012_034025.up,
-    down: migration_20261012_034025.down,
-    name: '20261012_034025'
-  },
-  {
-    up: migration_20261012_041000_enable_rls.up,
-    down: migration_20261012_041000_enable_rls.down,
-    name: '20261012_041000_enable_rls'
-  },
-  {
-    up: migration_20261018_134837_fk_indexes.up,
-    down: migration_20261018_134837_fk_indexes.down,
-    name: '20261018_134837_fk_indexes'
-  },
-  {
-    up: migration_20261022_000000_product_page_copy.up,
-    down: migration_20261022_000000_product_page_copy.down,
-    name: '20261022_000000_product_page_copy'
-  },
-  {
-    up: migration_20261023_000000_stockist_cities.up,
-    down: migration_20261023_000000_stockist_cities.down,
-    name: '20261023_000000_stockist_cities'
+    up: migration_20261024_000000_baseline.up,
+    down: migration_20261024_000000_baseline.down,
+    name: '20261024_000000_baseline',
   },
 ];
