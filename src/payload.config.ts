@@ -74,6 +74,15 @@ const emailAdapter = process.env.RESEND_API_KEY
     })
   : undefined
 
+// Fail-fast (T-M15-08): tanpa secret, cookie admin tak bisa ditandatangani —
+// lebih baik gagal saat load config daripada 500 samar saat runtime.
+const payloadSecret = process.env.PAYLOAD_SECRET
+if (!payloadSecret) {
+  throw new Error(
+    'PAYLOAD_SECRET wajib diset (file .env lokal / env Vercel / env CI). Lihat .env.example.',
+  )
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -144,9 +153,12 @@ export default buildConfig({
   },
   cors: corsOrigins,
   csrf: corsOrigins,
+  // REST-only (D-005/D-030): endpoint GraphQL dimatikan — skema tak lagi
+  // ekspos publik, permukaan API menyusut. Rute graphql/playground dihapus.
+  graphQL: { disable: true },
   editor: lexicalEditor(),
   email: emailAdapter,
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: payloadSecret,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

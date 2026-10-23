@@ -1,4 +1,4 @@
-import type { Access } from 'payload'
+import type { Access, FieldAccess } from 'payload'
 
 type UserLike = { id?: string | number; role?: unknown } | null | undefined
 
@@ -15,7 +15,7 @@ export const isAdmin: Access = ({ req }) => getRole(req.user) === 'admin'
  * Varian guard untuk level field (`FieldAccess` beda tanda tangan dari
  * `Access` koleksi — reuse langsung gagal tsc).
  */
-export const isAdminField = ({ req }: any): boolean => getRole(req?.user) === 'admin'
+export const isAdminField: FieldAccess = ({ req }) => getRole(req.user) === 'admin'
 
 /** Admin bebas; non-admin hanya baris miliknya. Untuk koleksi Users. */
 export const isAdminOrSelf: Access = ({ req }) => {
