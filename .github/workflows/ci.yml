@@ -46,3 +46,45 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run test:int
       - run: pnpm run build
+
+  # e2e admin+frontend (T-M15-13/D-034 — mencabut bagian e2e D-021):
+  # regresi UI admin tertangkap otomatis. Laporan diartifkat saat gagal.
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: kagounga_cms
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/kagounga_cms
+      PAYLOAD_SECRET: ci-dummy-secret-32chars-xxxxxxxx
+      CORS_ORIGIN: http://localhost:3000,http://localhost:5173
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
