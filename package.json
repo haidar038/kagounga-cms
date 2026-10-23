@@ -16,6 +16,7 @@
     "seed:products:id": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/seed-products-id.ts",
     "backfill:units": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/backfill-units.ts",
     "seed:posts": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/seed-posts.ts",
+    "seed:stockists": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/seed-stockists.ts",
     "seed:admin": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/promote-admin.ts",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",

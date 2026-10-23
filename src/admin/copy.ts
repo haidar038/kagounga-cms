@@ -47,6 +47,32 @@ export const copy = {
   shipping: 'Dropdown: "Excluded" or "Included". / Dropdown: "Excluded" atau "Included".',
   physicalDetails: 'Physical details / Detail fisik',
   wholesale: 'Wholesale (B2B) / Grosir (B2B)',
+  stockistCityCollection:
+    'One page per city. Slug becomes the public URL and cannot be changed after create. / Satu halaman per kota. Slug menjadi URL publik dan tidak bisa diubah setelah dibuat.',
+  stockistCity: 'City name shown on the page. / Nama kota yang tampil di halaman.',
+  stockistSlug:
+    'URL key, generated from city when empty. Read-only after create. / URL key, dibuat dari city bila kosong. Hanya baca setelah dibuat.',
+  stockistRegion: 'Administrative region for schema.org. / Wilayah administratif untuk schema.org.',
+  stockistTitle: 'H1 heading. / Judul H1.',
+  stockistLede: 'Opening paragraph below the H1. / Paragraf pembuka di bawah H1.',
+  stockistParagraphs:
+    'Body paragraphs, one paragraph per row. / Paragraf isi, satu paragraf per baris.',
+  stockistPoints:
+    'Sales points shown on this city page and the contact map. / Titik penjualan di halaman kota ini dan peta kontak.',
+  stockistPointId:
+    'Stable URL/anchor ID. Keep legacy IDs unchanged. / ID anchor/URL stabil. Jangan ubah ID lama.',
+  stockistPointIdRequired: 'Point ID is required. / ID titik wajib diisi.',
+  stockistPointIdPattern:
+    'Point ID: lowercase, numbers, dashes only. / ID titik: huruf kecil, angka, dan strip saja.',
+  stockistPointArea:
+    'Area or address fragment shown under the name. / Area atau potongan alamat di bawah nama.',
+  stockistPointActive:
+    'Inactive points stay in the CMS but are hidden from the site. / Titik nonaktif tetap di CMS tetapi disembunyikan dari situs.',
+  stockistPointIdsUnique:
+    'Point IDs must be unique within this city. / ID titik harus unik dalam kota ini.',
+  stockistPublishedNeedsPoint:
+    'A published city needs at least one active point. / Kota yang terbit harus punya minimal satu titik aktif.',
+  stockistSeoTitle: 'Unique title tag for this city page. / Judul SEO unik halaman kota.',
 } as const
 
 /** Validate message untuk pasangan gambar dual-sumber. */

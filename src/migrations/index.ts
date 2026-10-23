@@ -5,6 +5,7 @@ import * as migration_20261012_034025 from './20261012_034025';
 import * as migration_20261012_041000_enable_rls from './20261012_041000_enable_rls';
 import * as migration_20261018_134837_fk_indexes from './20261018_134837_fk_indexes';
 import * as migration_20261022_000000_product_page_copy from './20261022_000000_product_page_copy';
+import * as migration_20261023_000000_stockist_cities from './20261023_000000_stockist_cities';
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20261022_000000_product_page_copy.up,
     down: migration_20261022_000000_product_page_copy.down,
     name: '20261022_000000_product_page_copy'
+  },
+  {
+    up: migration_20261023_000000_stockist_cities.up,
+    down: migration_20261023_000000_stockist_cities.down,
+    name: '20261023_000000_stockist_cities'
   },
 ];

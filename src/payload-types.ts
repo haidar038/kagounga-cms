@@ -72,6 +72,7 @@ export interface Config {
     categories: Category;
     products: Product;
     posts: Post;
+    'stockist-cities': StockistCity;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'stockist-cities': StockistCitiesSelect<false> | StockistCitiesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -419,6 +421,76 @@ export interface Post {
   createdAt: string;
 }
 /**
+ * One page per city. Slug becomes the public URL and cannot be changed after create. / Satu halaman per kota. Slug menjadi URL publik dan tidak bisa diubah setelah dibuat.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stockist-cities".
+ */
+export interface StockistCity {
+  id: number;
+  /**
+   * City name shown on the page. / Nama kota yang tampil di halaman.
+   */
+  city: string;
+  /**
+   * URL key, generated from city when empty. Read-only after create. / URL key, dibuat dari city bila kosong. Hanya baca setelah dibuat.
+   */
+  slug: string;
+  /**
+   * Administrative region for schema.org. / Wilayah administratif untuk schema.org.
+   */
+  region: string;
+  /**
+   * H1 heading. / Judul H1.
+   */
+  title: string;
+  /**
+   * Opening paragraph below the H1. / Paragraf pembuka di bawah H1.
+   */
+  lede: string;
+  /**
+   * Body paragraphs, one paragraph per row. / Paragraf isi, satu paragraf per baris.
+   */
+  paragraphs: string[];
+  /**
+   * Sales points shown on this city page and the contact map. / Titik penjualan di halaman kota ini dan peta kontak.
+   */
+  points: {
+    /**
+     * Stable URL/anchor ID. Keep legacy IDs unchanged. / ID anchor/URL stabil. Jangan ubah ID lama.
+     */
+    pointId: string;
+    name: string;
+    /**
+     * Area or address fragment shown under the name. / Area atau potongan alamat di bawah nama.
+     */
+    area: string;
+    kind: 'hub' | 'retail' | 'partner';
+    lng: number;
+    lat: number;
+    /**
+     * Inactive points stay in the CMS but are hidden from the site. / Titik nonaktif tetap di CMS tetapi disembunyikan dari situs.
+     */
+    active?: boolean | null;
+    id?: string | null;
+  }[];
+  /**
+   * Unique title tag for this city page. / Judul SEO unik halaman kota.
+   */
+  seoTitle: string;
+  /**
+   * SEO meta description per locale. / Meta description SEO per locale.
+   */
+  metaDescription: string;
+  status: 'draft' | 'published';
+  /**
+   * Catalog display order ascending. / Urut tampil katalog menaik.
+   */
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -461,6 +533,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'stockist-cities';
+        value: number | StockistCity;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -662,6 +738,36 @@ export interface PostsSelect<T extends boolean = true> {
   author?: T;
   status?: T;
   publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stockist-cities_select".
+ */
+export interface StockistCitiesSelect<T extends boolean = true> {
+  city?: T;
+  slug?: T;
+  region?: T;
+  title?: T;
+  lede?: T;
+  paragraphs?: T;
+  points?:
+    | T
+    | {
+        pointId?: T;
+        name?: T;
+        area?: T;
+        kind?: T;
+        lng?: T;
+        lat?: T;
+        active?: T;
+        id?: T;
+      };
+  seoTitle?: T;
+  metaDescription?: T;
+  status?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }

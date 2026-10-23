@@ -12,6 +12,7 @@ import { Media } from './collections/Media'
 import { Categories } from './collections/Categories'
 import { Products } from './collections/Products'
 import { Posts } from './collections/Posts'
+import { StockistCities } from './collections/StockistCities'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -135,7 +136,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Categories, Products, Posts],
+  collections: [Users, Media, Categories, Products, Posts, StockistCities],
   localization: {
     locales: ['en', 'id'],
     defaultLocale: 'en',
