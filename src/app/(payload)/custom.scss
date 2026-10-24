@@ -1,4 +1,4 @@
-// Kagounga token parity (W2) — palet cream/ink/lime mirror frontend `new-kagounga/src/index.css`.
+// Kagounga token parity (W2) - palet cream/ink/lime mirror frontend `new-kagounga/src/index.css`.
 // Override: permukaan elevation 0–200 + foreground 800, theme bg/text/input, ramp `--color-success-*` (lime/olive).
 // Elevation 250–750 (teks muted, hover, border netral) dibiarkan → kontras teks bawaan tak berubah.
 @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
@@ -14,7 +14,7 @@
   --style-radius-m: 16px;
   --style-radius-l: 24px;
 
-  // Light — permukaan hangat + foreground ink
+  // Light - permukaan hangat + foreground ink
   --theme-bg: var(--kga-cream);
   --theme-input-bg: var(--kga-paper);
   --theme-text: var(--kga-ink);
@@ -48,7 +48,7 @@
 }
 
 html[data-theme='dark'] {
-  // Dark — ink sebagai kanvas, panel sedikit lebih terang
+  // Dark - ink sebagai kanvas, panel sedikit lebih terang
   --theme-bg: #131c17;
   --theme-input-bg: var(--kga-ink);
   --theme-text: var(--kga-cream);
@@ -70,7 +70,7 @@ html[data-theme='dark'] ::selection {
   color: var(--kga-ink);
 }
 
-// W3 — brand: logo login + ikon nav (aset currentColor → difilter di tema gelap).
+// W3 - brand: logo login + ikon nav (aset currentColor → difilter di tema gelap).
 .kga-brand-logo {
   display: block;
   height: 34px;
@@ -92,7 +92,7 @@ html[data-theme='dark'] .kga-brand-icon {
   filter: brightness(0) invert(1);
 }
 
-// W3 — slot beforeNavLinks: tautan ke situs publik.
+// W3 - slot beforeNavLinks: tautan ke situs publik.
 .kga-view-site {
   display: flex;
   align-items: center;
@@ -110,7 +110,7 @@ html[data-theme='dark'] .kga-brand-icon {
   text-decoration: underline;
 }
 
-// W4 — widget dashboard: ringkasan katalog + kelengkapan data grosir.
+// W4 - widget dashboard: ringkasan katalog + kelengkapan data grosir.
 .kga-widget {
   display: flex;
   flex-direction: column;

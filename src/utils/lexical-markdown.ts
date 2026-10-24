@@ -1,6 +1,6 @@
 /**
  * Konverter Lexical (Payload richText) ↔ markdown minimal.
- * Cermin ada di `new-kagounga/src/lib/lexical-markdown.ts` — ubah satu = ubah dua (D-010).
+ * Cermin ada di `new-kagounga/src/lib/lexical-markdown.ts` - ubah satu = ubah dua (D-010).
  * Subset didukung: paragraf, heading #–###, list bullet/number, quote,
  * link [teks](url), inline **bold** *italic* `code`.
  * Dipakai: seed M3 (md→lexical), ekspor/adapter M4–M5 (lexical→md,

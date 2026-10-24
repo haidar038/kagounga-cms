@@ -47,7 +47,7 @@ jobs:
       - run: pnpm run test:int
       - run: pnpm run build
 
-  # e2e admin+frontend (T-M15-13/D-034 — mencabut bagian e2e D-021):
+  # e2e admin+frontend (T-M15-13/D-034 - mencabut bagian e2e D-021):
   # regresi UI admin tertangkap otomatis. Laporan diartifkat saat gagal.
   e2e:
     runs-on: ubuntu-latest

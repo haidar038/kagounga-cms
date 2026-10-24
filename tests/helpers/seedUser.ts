@@ -22,7 +22,7 @@ export async function seedTestUser(): Promise<void> {
     },
   })
 
-  // Create fresh test user (admin — e2e admin butuh akses penuh)
+  // Create fresh test user (admin - e2e admin butuh akses penuh)
   await payload.create({
     collection: 'users',
     data: { ...testUser, role: 'admin' as const },

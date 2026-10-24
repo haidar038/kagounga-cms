@@ -24,8 +24,8 @@ export default function FrontendNotFound() {
         Page not found. / Halaman tidak ditemukan.
       </h1>
       <p style={{ marginTop: '1rem', lineHeight: 1.6, opacity: 0.7 }}>
-        The CMS has no public pages — content lives in the admin panel. / CMS ini tidak punya
-        halaman publik — konten ada di panel admin.
+        The CMS has no public pages - content lives in the admin panel. / CMS ini tidak punya
+        halaman publik - konten ada di panel admin.
       </p>
       <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
         <Link

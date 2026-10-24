@@ -1,6 +1,6 @@
 /**
  * Bilingual admin copy (M12): satu string `EN. / ID.` per keputusan user.
- * Tanpa infra i18n baru — tahan upgrade Payload, cukup grep bila mau audit.
+ * Tanpa infra i18n baru - tahan upgrade Payload, cukup grep bila mau audit.
  */
 
 export const copy = {
@@ -29,8 +29,8 @@ export const copy = {
   role: 'Only admin can change. New users default to editor. / Hanya admin bisa ubah. User baru default editor.',
   altMedia: 'Alt text for image. / Teks alt gambar.',
   previewLabel: 'Preview. / Pratinjau.',
-  previewEmpty: 'No image yet — fill the URL or pick an upload. / Belum ada gambar — isi URL atau pilih upload.',
-  previewUploadOnly: 'Upload selected — save, then check Media for the file. / Upload terpilih — simpan, lalu cek file di Media.',
+  previewEmpty: 'No image yet - fill the URL or pick an upload. / Belum ada gambar - isi URL atau pilih upload.',
+  previewUploadOnly: 'Upload selected - save, then check Media for the file. / Upload terpilih - simpan, lalu cek file di Media.',
   legacyUrl: 'Legacy URL (Cloudinary) / URL lama (Cloudinary)',
   packaging: 'Box/pouch material, e.g. "350 gsm Ivory Board, Matte Laminated, Tuck-End Box". / Bahan kemasan, mis. "350 gsm Ivory Board, Matte Laminated, Tuck-End Box".',
   dimensions: 'Pack dimensions, e.g. "8.5 x 14 x 3 cm". / Dimensi kemasan, mis. "8.5 x 14 x 3 cm".',

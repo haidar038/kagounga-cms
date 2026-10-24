@@ -9,8 +9,8 @@ import { isAuthenticated } from './access'
  * Berita. Cermin field `NewsPost` frontend
  * (`new-kagounga/src/types/content.ts`) + `metaDescription` untuk SEO.
  * Teks terterjemahkan via localization (default EN, fallback aktif).
- * Slug TIDAK dilokalkan — mirror `/id/news/:slug` pakai slug sama.
- * Tabs/collapsible di bawah presentational saja (unnamed) — skema/API tetap.
+ * Slug TIDAK dilokalkan - mirror `/id/news/:slug` pakai slug sama.
+ * Tabs/collapsible di bawah presentational saja (unnamed) - skema/API tetap.
  */
 export const Posts: CollectionConfig = {
   slug: 'posts',

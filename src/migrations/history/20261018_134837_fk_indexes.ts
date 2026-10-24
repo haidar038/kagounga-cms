@@ -2,7 +2,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 /**
  * Index FK advisor Supabase: 3 kolom parent yang tak punya index leading.
- * Idempoten (IF NOT EXISTS) — aman di-`up` ulang walau schema di-push dari dev.
+ * Idempoten (IF NOT EXISTS) - aman di-`up` ulang walau schema di-push dari dev.
  * Nama mengikuti konvensi prod: `<table>_parent_id_idx`.
  */
 export async function up({ db }: MigrateUpArgs): Promise<void> {

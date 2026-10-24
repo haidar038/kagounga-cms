@@ -144,7 +144,7 @@ describe('Posts', () => {
   // ^ init Payload tarik skema ~25s saat 3 worker paralel.
 
   afterAll(async () => {
-    if (!payload) return // beforeAll gugur (mis. DB) — jangan samarkan error asli.
+    if (!payload) return // beforeAll gugur (mis. DB) - jangan samarkan error asli.
     await payload.delete({
       collection: 'posts',
       where: { slug: { in: SLUGS } },
@@ -156,7 +156,7 @@ describe('Posts', () => {
     const res = await payload.find({
       collection: 'posts',
       where: { slug: { in: SLUGS } },
-      // Local API default overrideAccess:true — matikan eksplisit agar akses jalan.
+      // Local API default overrideAccess:true - matikan eksplisit agar akses jalan.
       overrideAccess: false,
     })
     expect(res.docs).toHaveLength(1)

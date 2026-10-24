@@ -19,7 +19,7 @@ function loadPg(): any {
  * Backfill satu kali SEBELUM migrasi enum dropdown (20261012_034025).
  * Tanpa ini `USING col::enum` gagal untuk nilai lama ("/ box", "/ pak",
  * "/ kotak", "/ unit", "Tidak termasuk"). Raw SQL agar jalan saat kolom
- * masih varchar — Payload local API tak bisa boot dalam keadaan ini.
+ * masih varchar - Payload local API tak bisa boot dalam keadaan ini.
  * Idempoten, aman diulang. Jalan: `pnpm run backfill:units`.
  */
 async function main(): Promise<void> {
@@ -27,7 +27,7 @@ async function main(): Promise<void> {
   const client = new Client({ connectionString: process.env.DATABASE_URL })
   await client.connect()
   try {
-    // Kolom baru (023059) mungkin belum ada bila migrasi itu belum jalan —
+    // Kolom baru (023059) mungkin belum ada bila migrasi itu belum jalan -
     // lewati saja, migrasi + backfill ulang nanti menangani sisanya.
     const cols = await client.query(
       `SELECT column_name, udt_name FROM information_schema.columns

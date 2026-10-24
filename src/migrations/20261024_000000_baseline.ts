@@ -4,7 +4,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
  * Baseline squash (T-M15-12/D-035): seluruh schema Payload 3.90.2 dalam satu
  * migrasi, diambil verbatim dari pg_dump --schema-only dev-push 2026-10-24
  * (sumber kebenaran = schema sesuai config saat ini). Migrasi lama (M2–M14)
- * dipertahankan sebagai sejarah tapi tak lagi diregistrasi — mereka asumsikan
+ * dipertahankan sebagai sejarah tapi tak lagi diregistrasi - mereka asumsikan
  * dev-push awal (tipe enum "_locales" dsb.) sehingga tak replayable dari nol.
  *
  * Idempoten: kalau schema sudah ada (DB dev-push / hasil 8 migrasi lama),
@@ -1610,7 +1610,7 @@ CREATE INDEX payload_migrations_created_at_idx ON public.payload_migrations USIN
 --
 
 CREATE INDEX payload_migrations_updated_at_idx ON public.payload_migrations USING btree (updated_at);
-` 
+`
 
 const RLS = `
 ALTER TABLE "public"."categories" ENABLE ROW LEVEL SECURITY;
@@ -1642,17 +1642,17 @@ END $$;
 `
 
 export async function up({ db, payload }: MigrateUpArgs): Promise<void> {
-  const existing = await db.execute(sql`SELECT to_regclass('public.products') IS NOT NULL AS present`)
-  const present = Boolean((existing.rows[0] as { present?: boolean } | undefined)?.present)
-  if (present) {
-    payload.logger.info({ msg: 'baseline: schema sudah ada — skip DDL, tegakkan RLS' })
-  } else {
-    payload.logger.info({ msg: 'baseline: membangun schema penuh dari DB kosong' })
-    await db.execute(sql.raw(DDL))
-  }
-  await db.execute(sql.raw(RLS))
+    const existing = await db.execute(sql`SELECT to_regclass('public.products') IS NOT NULL AS present`)
+    const present = Boolean((existing.rows[0] as { present?: boolean } | undefined)?.present)
+    if (present) {
+        payload.logger.info({ msg: 'baseline: schema sudah ada - skip DDL, tegakkan RLS' })
+    } else {
+        payload.logger.info({ msg: 'baseline: membangun schema penuh dari DB kosong' })
+        await db.execute(sql.raw(DDL))
+    }
+    await db.execute(sql.raw(RLS))
 }
 
 export async function down({ db }: MigrateDownArgs): Promise<void> {
-  await db.execute(sql.raw('DROP SCHEMA "public" CASCADE;\nCREATE SCHEMA "public";'))
+    await db.execute(sql.raw('DROP SCHEMA "public" CASCADE;\nCREATE SCHEMA "public";'))
 }

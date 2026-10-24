@@ -40,7 +40,7 @@ next-env.d.ts
 
 .env
 
-# Bundled skill reference docs — bukan kode aplikasi (T-M15-11)
+# Bundled skill reference docs - bukan kode aplikasi (T-M15-11)
 /.claude/
 
 # Local-only env helper (tak dipakai skrip mana pun)

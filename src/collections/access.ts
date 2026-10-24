@@ -13,7 +13,7 @@ export const isAdmin: Access = ({ req }) => getRole(req.user) === 'admin'
 
 /**
  * Varian guard untuk level field (`FieldAccess` beda tanda tangan dari
- * `Access` koleksi — reuse langsung gagal tsc).
+ * `Access` koleksi - reuse langsung gagal tsc).
  */
 export const isAdminField: FieldAccess = ({ req }) => getRole(req.user) === 'admin'
 

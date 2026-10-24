@@ -4,7 +4,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
  * Kunci PostgREST anon: semua tabel Payload tanpa policy = deny by default.
  * Aman untuk aplikasi karena koneksi memakai role postgres (bypass RLS);
  * yang diblokir hanya akses anon/authenticated langsung via REST.
- * Idempoten — di-`up` ulang tidak error, jadi RLS pulih setiap migrate
+ * Idempoten - di-`up` ulang tidak error, jadi RLS pulih setiap migrate
  * walau schema sempat di-push ulang dari dev.
  */
 const TABLES = [

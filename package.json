@@ -1,7 +1,7 @@
 {
   "name": "kagounga-cms",
   "version": "1.0.0",
-  "description": "Kagounga CMS — Payload 3 + Postgres untuk katalog & berita new-kagounga",
+  "description": "Kagounga CMS - Payload 3 + Postgres untuk katalog & berita new-kagounga",
   "license": "MIT",
   "type": "module",
   "scripts": {

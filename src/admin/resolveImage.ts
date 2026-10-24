@@ -1,6 +1,6 @@
 /**
  * Resolver sumber gambar dual-source (M12): relasi upload baru ATAU url remote.
- * Dipakai Cell (list) + Field (edit preview). Pure — tanpa JSX, gampang dites.
+ * Dipakai Cell (list) + Field (edit preview). Pure - tanpa JSX, gampang dites.
  */
 
 export type ImageRelationValue = {

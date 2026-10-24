@@ -53,7 +53,7 @@ function PreviewShell({ src, note }: { src: string | null; note: string }) {
           }}
           aria-hidden
         >
-          —
+          -
         </span>
       )}
       <span style={hintStyle}>{note}</span>

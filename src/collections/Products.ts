@@ -13,7 +13,7 @@ import { isAuthenticated } from './access'
  * (`moq`, `moqUnit`, `wholesalePriceNumber`, `wholesaleCurrency`,
  * `wholesalePer`, `shipping`). Semua opsional, berlaku semua produk.
  * Gambar: relasi `image` (upload baru) atau `imageUrl` (Cloudinary lama).
- * Tabs/collapsible di bawah presentational saja (unnamed) — skema/API tetap.
+ * Tabs/collapsible di bawah presentational saja (unnamed) - skema/API tetap.
  */
 export const Products: CollectionConfig = {
   slug: 'products',

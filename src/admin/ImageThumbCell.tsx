@@ -30,7 +30,7 @@ function Thumb({ src, alt }: { src: string | null; alt: string }) {
   if (!src || failed) {
     return (
       <span style={emptyStyle} aria-hidden>
-        —
+        -
       </span>
     )
   }

@@ -2,7 +2,7 @@ import { MigrateDownArgs, MigrateUpArgs, sql } from '@payloadcms/db-postgres'
 
 /**
  * M8: lokalisasi field teks Products. Salin nilai EN lama ke tabel locale
- * (`_locale='en'`) SEBELUM kolom lama di-drop — tanpa ini data EN hilang.
+ * (`_locale='en'`) SEBELUM kolom lama di-drop - tanpa ini data EN hilang.
  * Disusun manual: `migrate:create` hanya hasilkan full-baseline untuk DB lama.
  */
 export async function up({ db }: MigrateUpArgs): Promise<void> {

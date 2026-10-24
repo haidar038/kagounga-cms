@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 /**
  * Global 404 (bilingual EN/ID). Tanpa sentuh generated
- * `(payload)/admin/[[...segments]]/not-found.tsx` — file itu milik Payload.
+ * `(payload)/admin/[[...segments]]/not-found.tsx` - file itu milik Payload.
  */
 export default function NotFound() {
   return (

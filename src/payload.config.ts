@@ -25,56 +25,56 @@ const corsOrigins = (process.env.CORS_ORIGIN ?? 'http://localhost:5173')
   .filter(Boolean)
 
 // Media persisten (M7): disk lokal hilang tiap deploy (Vercel ephemeral).
-// Plugin S3 aktif hanya bila S3_BUCKET diset — dev lokal tanpa kredensial
+// Plugin S3 aktif hanya bila S3_BUCKET diset - dev lokal tanpa kredensial
 // tetap pakai upload disk. R2/S3-compatible via S3_ENDPOINT (+ path-style).
 const s3Bucket = process.env.S3_BUCKET || ''
 const s3Plugins =
   s3Bucket === ''
     ? []
     : [
-        s3Storage({
-          collections: {
-            media: {
-              prefix: 'media',
-              disableLocalStorage: true,
-              generateFileURL: ({
-                filename,
-                prefix,
-              }: {
-                filename: string
-                prefix?: string
-              }) => {
-                const base = (
-                  process.env.S3_PUBLIC_URL || `https://${s3Bucket}.s3.amazonaws.com`
-                ).replace(/\/+$/, '')
-                return `${base}/${prefix ? `${prefix}/` : ''}${filename}`
-              },
+      s3Storage({
+        collections: {
+          media: {
+            prefix: 'media',
+            disableLocalStorage: true,
+            generateFileURL: ({
+              filename,
+              prefix,
+            }: {
+              filename: string
+              prefix?: string
+            }) => {
+              const base = (
+                process.env.S3_PUBLIC_URL || `https://${s3Bucket}.s3.amazonaws.com`
+              ).replace(/\/+$/, '')
+              return `${base}/${prefix ? `${prefix}/` : ''}${filename}`
             },
           },
-          bucket: s3Bucket,
-          config: {
-            credentials: {
-              accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-              secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
-            },
-            region: process.env.S3_REGION || 'auto',
-            ...(process.env.S3_ENDPOINT ? { endpoint: process.env.S3_ENDPOINT } : {}),
-            ...(process.env.S3_FORCE_PATH_STYLE === 'true' ? { forcePathStyle: true } : {}),
+        },
+        bucket: s3Bucket,
+        config: {
+          credentials: {
+            accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+            secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
           },
-        }),
-      ]
+          region: process.env.S3_REGION || 'auto',
+          ...(process.env.S3_ENDPOINT ? { endpoint: process.env.S3_ENDPOINT } : {}),
+          ...(process.env.S3_FORCE_PATH_STYLE === 'true' ? { forcePathStyle: true } : {}),
+        },
+      }),
+    ]
 
 // Email transaksional (reset password dsb). Tanpa RESEND_API_KEY = tulis ke
 // console (dev). Wajib diset di prod.
 const emailAdapter = process.env.RESEND_API_KEY
   ? resendAdapter({
-      defaultFromAddress: process.env.RESEND_FROM_ADDRESS || 'noreply@kagounga.com',
-      defaultFromName: process.env.RESEND_FROM_NAME || 'Kagounga',
-      apiKey: process.env.RESEND_API_KEY,
-    })
+    defaultFromAddress: process.env.RESEND_FROM_ADDRESS || 'noreply@kagounga.com',
+    defaultFromName: process.env.RESEND_FROM_NAME || 'Kagounga',
+    apiKey: process.env.RESEND_API_KEY,
+  })
   : undefined
 
-// Fail-fast (T-M15-08): tanpa secret, cookie admin tak bisa ditandatangani —
+// Fail-fast (T-M15-08): tanpa secret, cookie admin tak bisa ditandatangani -
 // lebih baik gagal saat load config daripada 500 samar saat runtime.
 const payloadSecret = process.env.PAYLOAD_SECRET
 if (!payloadSecret) {
@@ -123,8 +123,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: '— Kagounga CMS',
-      description: 'Kagounga CMS — manage catalog and news.',
+      titleSuffix: '- Kagounga CMS',
+      description: 'Kagounga CMS - manage catalog and news.',
       icons: [
         {
           rel: 'icon',
@@ -153,7 +153,7 @@ export default buildConfig({
   },
   cors: corsOrigins,
   csrf: corsOrigins,
-  // REST-only (D-005/D-030): endpoint GraphQL dimatikan — skema tak lagi
+  // REST-only (D-005/D-030): endpoint GraphQL dimatikan - skema tak lagi
   // ekspos publik, permukaan API menyusut. Rute graphql/playground dihapus.
   graphQL: { disable: true },
   editor: lexicalEditor(),

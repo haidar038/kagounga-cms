@@ -8,7 +8,7 @@ const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
   // 'standalone' hanya untuk Docker (Dockerfile copies .next/standalone).
-  // Vercel tak mendukungnya (nft trace gagal) — Vercel set VERCEL=1 otomatis.
+  // Vercel tak mendukungnya (nft trace gagal) - Vercel set VERCEL=1 otomatis.
   ...(process.env.VERCEL ? {} : { output: 'standalone' as const }),
   // Cache: file media tak ber-hash nama tapi Payload sufiks saat tabrakan,
   // aman cache harian + SWR mingguan.
