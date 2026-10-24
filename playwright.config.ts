@@ -37,5 +37,7 @@ export default defineConfig({
     command: 'pnpm dev',
     reuseExistingServer: true,
     url: 'http://localhost:3000',
+    // Kompilasi dev pertama Payload bisa >60s di mesin lambat.
+    timeout: 120_000,
   },
 })
