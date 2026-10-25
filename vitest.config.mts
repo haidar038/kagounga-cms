@@ -9,9 +9,8 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     // int: butuh Postgres hidup; unit (T-M15-10): murni, aman paralel.
     include: ['tests/int/**/*.int.spec.ts', 'tests/unit/**/*.spec.ts'],
-    // CI: DB service kosong; dev-push 4 file paralel adu CREATE TYPE/TABLE.
-    // Serial via env (GitHub set CI=true otomatis) - lokal tetap paralel.
-    // CLI `-- --maxWorkers` tak bisa di sini (pnpm teruskan `--` mentah).
-    maxWorkers: process.env.CI ? 1 : undefined,
+    // Serial selalu: tiap worker mem-push skema saat init Payload - paralel
+    // adu CREATE TYPE/TABLE di DB kosong (D-022). Total 25 test, murah.
+    maxWorkers: 1,
   },
 })
